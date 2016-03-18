@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>极昼博客</title>
+  <title>前端面试题html相关总结 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端、web、js、html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="极昼博客">
-<meta property="og:url" content="http://zjzno1.github.io/index.html">
+  <meta name="description" content="HTML 相关问题：1. doctype(文档类型) 的作用是什么？（1）&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &amp;lt;html&amp;gt; 标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式（怪异模式）呈现。（2）标准模式的排版和JS运作模式都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题html相关总结">
+<meta property="og:url" content="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="前端、web、js、html">
+<meta property="og:description" content="HTML 相关问题：1. doctype(文档类型) 的作用是什么？（1）&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &amp;lt;html&amp;gt; 标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式（怪异模式）呈现。（2）标准模式的排版和JS运作模式都">
+<meta property="og:updated_time" content="2016-03-18T06:03:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="极昼博客">
-<meta name="twitter:description" content="前端、web、js、html">
+<meta name="twitter:title" content="前端面试题html相关总结">
+<meta name="twitter:description" content="HTML 相关问题：1. doctype(文档类型) 的作用是什么？（1）&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &amp;lt;html&amp;gt; 标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式（怪异模式）呈现。（2）标准模式的排版和JS运作模式都">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -63,102 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-untitled" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/18/untitled/" class="article-date">
-  <time datetime="2016-03-18T05:02:51.000Z" itemprop="datePublished">2016-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	<div data-author="david" data-time="2011-06-20" data-comment-num="10">...</div>
-</body>
-</html>
-<script type="text/javascript">
-	// var a = "a";
-	// function b () {
-	// 	console.log(a);
-	// 	 a = "b";
-	// 	console.log(a);
-	// 	return a;
-	// }
-	// b();
-	// console.log(a)
-	var post = document.getElementsByTagName('div')[0];
-post.dataset; // DOMStringMap
-post.dataset.commentNum; // 10
-console.log(post.dataset)
-console.log(post.dataset.commentNum)
-</script>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/18/untitled/" data-id="cilxawic6000kgpp00gjt21o6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-第一篇博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/18/第一篇博客/" class="article-date">
-  <time datetime="2016-03-18T03:48:28.000Z" itemprop="datePublished">2016-03-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/18/第一篇博客/">第一篇博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言">前言</h3><h6 id="记得第一次开通技术博客是在2014年的7月，当时是在91主机上买了一年的服务器，域名加服务器总共花了700+，但是呵呵，服务真是差透了。于是转战github搭建博客，免费又方便。当时主机到期时当时写的文章没有保存下来，（心好累。。－－||）于是就在这里从开一个博客了。。之前的文章看情况有可能的话在写一遍。">记得第一次开通技术博客是在2014年的7月，当时是在91主机上买了一年的服务器，域名加服务器总共花了700+，但是呵呵，服务真是差透了。于是转战github搭建博客，免费又方便。当时主机到期时当时写的文章没有保存下来，（心好累。。－－||）于是就在这里从开一个博客了。。之前的文章看情况有可能的话在写一遍。</h6><h6 id="写本博客的目的一是积累学到的技术经验，而是进行分享。在我的技术之路上有得到很多前辈同学或者网络上不认识的人的帮助，我感觉这很温暖，也很好。交流、分享、开源是我们程序员界的优良传统，我也会继承发扬下去。">写本博客的目的一是积累学到的技术经验，而是进行分享。在我的技术之路上有得到很多前辈同学或者网络上不认识的人的帮助，我感觉这很温暖，也很好。<font style="color:red">交流、分享、开源</font>是我们程序员界的优良传统，我也会继承发扬下去。</h6><h6 id="想说的话就这么多。如果大家有什么疑问或者发现我哪里有错误，欢迎联系我^_^，qq：786833771_email：abbottzjz@gmail-com">想说的话就这么多。如果大家有什么疑问或者发现我哪里有错误，欢迎联系我^_^，qq：786833771     email：abbottzjz@gmail.com</h6><h4 id="一些其他博客">一些其他博客</h4><h6 id="Scofield_Blog"><a href="http://scofieldwyq.github.io/" target="_blank" rel="external">Scofield Blog</a></h6><h6 id="PPTing’s_Blog"><a href="http://ppting.me/" target="_blank" rel="external">PPTing’s Blog</a></h6><h6 id="markyun"><a href="http://markyun.github.io/" target="_blank" rel="external">markyun</a></h6>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/18/第一篇博客/" data-id="cilxawiby0009gpp0yur75rnn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前言/">前言</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-前端面试题html相关总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-前端面试题html相关总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/17/前端面试题html相关总结/" class="article-date">
   <time datetime="2016-03-17T07:27:09.000Z" itemprop="datePublished">2016-03-17</time>
@@ -171,8 +77,8 @@ console.log(post.dataset.commentNum)
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/17/前端面试题html相关总结/">前端面试题html相关总结</a>
+    <h1 class="article-title" itemprop="name">
+      前端面试题html相关总结
     </h1>
   
 
@@ -256,246 +162,29 @@ FALLBACK:
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-跨域及解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/14/跨域及解决办法/" class="article-date">
-  <time datetime="2016-03-14T08:55:00.000Z" itemprop="datePublished">2016-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2016/03/18/第一篇博客/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/14/跨域及解决办法/">跨域及解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+          第一篇博客
         
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/14/跨域及解决办法/" data-id="cilxawibn0003gpp0x8wlmxwm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/14/跨域及解决办法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">跨域及解决办法</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
-
-  
-    <article id="post-css盒模型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/13/css盒模型/" class="article-date">
-  <time datetime="2016-03-13T11:42:11.000Z" itemprop="datePublished">2016-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/13/css盒模型/">css盒模型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>所谓盒模型，就是css当中最常用的一种思维模型。<br>它有4个属性值，分别为</p>
-<ol>
-<li>内容(content) </li>
-<li>填充(padding) </li>
-<li>边框(border) </li>
-<li>边界(margin) </li>
-</ol>
-<p>每个padding，border，margin都有上下左右4个部分可以设置，盒模型也是文档流的基础</p>
-<p>以下是盒模型的图片</p>
-<p><img src="http://ww1.sinaimg.cn/small/a5152f55jw1f1whr4dursj20ds0a6aaz.jpg" alt=""> </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/13/css盒模型/" data-id="cilxawic8000lgpp0t6eg2pm2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-chrome开发者模式教程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/12/chrome开发者模式教程/" class="article-date">
-  <time datetime="2016-03-12T12:25:00.000Z" itemprop="datePublished">2016-03-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/12/chrome开发者模式教程/">chrome开发者模式教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="这是我之前写的一篇chrome开发者模式使用的教程，后面也有我对前端的一些认识与经历，希望能对看到的人有些帮助">这是我之前写的一篇chrome开发者模式使用的教程，后面也有我对前端的一些认识与经历，希望能对看到的人有些帮助</h4><p><a href="http://yun.baidu.com/s/1bnr3bfL" target="_blank" rel="external">轻松玩转chrome开发者模式</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/12/chrome开发者模式教程/" data-id="cilxawiar0000gpp0zzkfzfnr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编写html应当遵循的原则" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/12/编写html应当遵循的原则/" class="article-date">
-  <time datetime="2016-03-12T11:36:14.000Z" itemprop="datePublished">2016-03-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/12/编写html应当遵循的原则/">编写html应当遵循的原则</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="以下是bootsharp给出的h5标准，很有参考意义，可以推荐下">以下是bootsharp给出的h5标准，很有参考意义，可以推荐下</h4><ol>
-<li>用两个空格符代替tab</li>
-<li>嵌套元素应当进行缩进（即两空格）</li>
-<li>对于属性的定义，用双引号</li>
-<li>不要自闭合</li>
-<li>不可省略结束标签</li>
-<li>为每个HTML页面第一行添加标准模式&lt;!DOCTYPE html&gt;</li>
-<li>语言属性<html lang="zh-cn"></html></li>
-<li>IE兼容模式<meta http-equiv="X-UA-Compatible" content="IE=Edge"></li>
-<li>字符编码<meta charset="utf-8"></li>
-<li>引入css和js文件<link rel="stylesheet" href="code-guide.css"><pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"code-guide.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</code></pre></li>
-<li>尽量减少标签并保持最小的时间复杂度</li>
-<li>属性顺序  <pre><code><span class="class"><span class="keyword">class</span>
-</span>id , nmae
-data-*
-src , <span class="keyword">for</span> , <span class="class"><span class="keyword">type</span> , <span class="title">href</span>
-</span>title , alt
-aria-* , role
-</code></pre></li>
-<li>布尔boolean属性不用赋值</li>
-<li>避免JavaScript生成的标签</li>
-</ol>
-<h5 id="h5标准实例">h5标准实例</h5><p><img src="http://ww1.sinaimg.cn/large/a5152f55gw1ew1s25ouiej20dv076jt8.jpg" alt=""> </p>
-<h5 id="另外我的一些感悟">另外我的一些感悟</h5><ul>
-<li>编写html时应当符合语义化，即对html的编写符合人类和浏览器的阅读习惯</li>
-<li>编写html时一定要注意文档流，注意清除浮动，不要破坏文档流</li>
-<li>尽量减少标签的使用</li>
-</ul>
-<h5 id="以上">以上</h5>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/12/编写html应当遵循的原则/" data-id="cilxawibu0004gpp073q9p724" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文章/">文章</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-测试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/03/测试/" class="article-date">
-  <time datetime="2015-12-03T09:05:44.000Z" itemprop="datePublished">2015-12-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/03/测试/">测试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span> </span>{
-    alert{<span class="string">'hello world!'</span>};
-}
-</code></pre><p>hello world!</p>
-<p>这是测试页面！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2015/12/03/测试/" data-id="cilxawic2000egpp0plql6301" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
 </section>
         
           <aside id="sidebar">
