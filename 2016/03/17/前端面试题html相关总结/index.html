@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/index.html">
 <meta property="og:site_name" content="极昼博客">
 <meta property="og:description" content="HTML 相关问题：1. doctype(文档类型) 的作用是什么？（1）&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &amp;lt;html&amp;gt; 标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式（怪异模式）呈现。（2）标准模式的排版和JS运作模式都">
-<meta property="og:updated_time" content="2016-03-18T06:03:43.000Z">
+<meta property="og:updated_time" content="2016-03-19T05:21:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题html相关总结">
 <meta name="twitter:description" content="HTML 相关问题：1. doctype(文档类型) 的作用是什么？（1）&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &amp;lt;html&amp;gt; 标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式（怪异模式）呈现。（2）标准模式的排版和JS运作模式都">
@@ -110,8 +110,7 @@ post.dataset.commentNum; <span class="comment">// 10</span>
 <h4 id="15-_页面导入样式时，使用link和@import有什么区别？">15. 页面导入样式时，使用link和@import有什么区别？</h4><p> (1)link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;<br>（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;<br>（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;</p>
 <h4 id="16-_介绍一下你对浏览器内核的理解？">16. 介绍一下你对浏览器内核的理解？</h4><p>主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。<br>渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。<br>JS引擎则：解析和执行javascript来实现网页的动态效果。<br>最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。</p>
 <h4 id="17-_常见的浏览器内核有哪些？">17. 常见的浏览器内核有哪些？</h4><p>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]<br>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等<br>Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]<br>Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]</p>
-<h4 id="18-_html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分_HTML_和">18. html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和</h4><p>HTML5？</p>
-<ul>
+<h4 id="18-_html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分_HTML_和_HTML5？">18. html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？</h4><ul>
 <li>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>绘画 canvas;<br>用于媒介回放的 video 和 audio 元素;<br>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;<br>sessionStorage 的数据在浏览器关闭后自动删除;<br>语意化更好的内容元素，比如 article、footer、header、nav、section;<br>表单控件，calendar、date、time、email、url、search;<br>新的技术webworker, websockt, Geolocation;<br>移除的元素：<br>纯表现的元素：basefont，big，center，font, s，strike，tt，u;<br>对可用性产生负面影响的元素：frame，frameset，noframes；</li>
 <li><p>支持HTML5新标签：<br>   IE8/IE7/IE6支持通过document.createElement方法产生的标签，<br>   可以利用这一特性让这些浏览器支持HTML5新标签，<br>   浏览器支持新标签后，还需要添加标签默认的样式。</p>
 <p>   当然最好的方式是直接使用成熟的框架、比如html5shim;</p>
@@ -154,7 +153,7 @@ FALLBACK:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/" data-id="cilxaxucq000gh1p0at7orvln" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/" data-id="cilyrik4v000g7xgac1iu7dbl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a></li></ul>
@@ -165,11 +164,11 @@ FALLBACK:
     
 <nav id="article-nav">
   
-    <a href="/2016/03/18/第一篇博客/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/03/18/js变量声明提前/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          第一篇博客
+          js变量声明提前
         
       </div>
     </a>
@@ -202,7 +201,7 @@ FALLBACK:
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -211,7 +210,7 @@ FALLBACK:
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/html/" style="font-size: 20px;">html</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 10px;">面试题（知识点）总结</a>
+      <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/html/" style="font-size: 20px;">html</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 20px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -220,7 +219,7 @@ FALLBACK:
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -232,7 +231,15 @@ FALLBACK:
       <ul>
         
           <li>
-            <a href="/2016/03/18/第一篇博客/">第一篇博客</a>
+            <a href="/2016/03/19/第一篇博客/">第一篇博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/19/前端面试题css相关总结/">前端面试题css相关总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/18/js变量声明提前/">js变量声明提前</a>
           </li>
         
           <li>
@@ -241,14 +248,6 @@ FALLBACK:
         
           <li>
             <a href="/2016/03/14/跨域及解决办法/">跨域及解决办法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/13/css盒模型/">css盒模型</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/12/chrome开发者模式教程/">chrome开发者模式教程</a>
           </li>
         
       </ul>
