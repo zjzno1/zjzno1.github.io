@@ -3,30 +3,39 @@
 <head>
   <meta charset="utf-8">
   
-  <title>测试 | 极昼博客</title>
+  <title>git基本操作 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="function a() {
-    alert{&apos;hello world!&apos;};
-}
-hello world!
-这是测试页面！">
+  <meta name="description" content="接触git也有一段时间了，现在总结下git的使用知识点。如想详细学习git，请百度———— ［廖雪峰 git］ 第一个就是。
+git知识点：####1. 如何上传一个项目
+####(再次之前默认已经配置好ssh密匙等)
+
+首先在git中新建一个仓库（名字不可以为中文）；
+在本地建立与之对应的一个仓库用于存储这个仓库的代码；
+cd到本仓库的目录下；
+git init （此步操作完成后，会生成一个隐藏">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://zjzno1.github.io/2015/12/03/测试/index.html">
+<meta property="og:title" content="git基本操作">
+<meta property="og:url" content="http://zjzno1.github.io/2016/03/24/git基本操作/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="function a() {
-    alert{&apos;hello world!&apos;};
-}
-hello world!
-这是测试页面！">
-<meta property="og:updated_time" content="2016-03-12T12:30:20.000Z">
+<meta property="og:description" content="接触git也有一段时间了，现在总结下git的使用知识点。如想详细学习git，请百度———— ［廖雪峰 git］ 第一个就是。
+git知识点：####1. 如何上传一个项目
+####(再次之前默认已经配置好ssh密匙等)
+
+首先在git中新建一个仓库（名字不可以为中文）；
+在本地建立与之对应的一个仓库用于存储这个仓库的代码；
+cd到本仓库的目录下；
+git init （此步操作完成后，会生成一个隐藏">
+<meta property="og:updated_time" content="2016-03-24T04:35:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
-<meta name="twitter:description" content="function a() {
-    alert{&apos;hello world!&apos;};
-}
-hello world!
-这是测试页面！">
+<meta name="twitter:title" content="git基本操作">
+<meta name="twitter:description" content="接触git也有一段时间了，现在总结下git的使用知识点。如想详细学习git，请百度———— ［廖雪峰 git］ 第一个就是。
+git知识点：####1. 如何上传一个项目
+####(再次之前默认已经配置好ssh密匙等)
+
+首先在git中新建一个仓库（名字不可以为中文）；
+在本地建立与之对应的一个仓库用于存储这个仓库的代码；
+cd到本仓库的目录下；
+git init （此步操作完成后，会生成一个隐藏">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -76,16 +85,12 @@ hello world!
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-测试" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-git基本操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/03/测试/" class="article-date">
-  <time datetime="2015-12-03T09:05:44.000Z" itemprop="datePublished">2015-12-03</time>
+    <a href="/2016/03/24/git基本操作/" class="article-date">
+  <time datetime="2016-03-24T04:20:18.000Z" itemprop="datePublished">2016-03-24</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -94,7 +99,7 @@ hello world!
         
   
     <h1 class="article-title" itemprop="name">
-      测试
+      git基本操作
     </h1>
   
 
@@ -102,33 +107,46 @@ hello world!
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span> </span>{
-    alert{<span class="string">'hello world!'</span>};
-}
-</code></pre><p>hello world!</p>
-<p>这是测试页面！</p>
+        <p>接触git也有一段时间了，现在总结下git的使用知识点。如想详细学习git，请百度———— ［廖雪峰 git］ 第一个就是。</p>
+<h3 id="git知识点：">git知识点：</h3><p>####1. 如何上传一个项目</p>
+<p>####(再次之前默认已经配置好ssh密匙等)</p>
+<ol>
+<li>首先在git中新建一个仓库（名字不可以为中文）；</li>
+<li>在本地建立与之对应的一个仓库用于存储这个仓库的代码；</li>
+<li>cd到本仓库的目录下；</li>
+<li>git init （此步操作完成后，会生成一个隐藏的.git后缀文件） </li>
+<li>git add . (.是指添加整个工程，如需添加单个文件则只需要 git add test.js)</li>
+<li>git commit －m”注释内容”</li>
+<li>git remote add origin git@github.com:zjzno1/Demo.git (zjzno1是你的git名字，Demo是你新建的仓库的名字)</li>
+<li>git push -u origin master (将项目推向git)</li>
+</ol>
+<p>####2. 删除git一个项目（仓库）<font style="color: red">慎用！！！！！<font></font></font></p>
+<ol>
+<li>在主页点击进入想要删除的仓库</li>
+<li>在仓库的上方点击settings</li>
+<li>将页面拖到最下面，点击Delete this repository</li>
+<li>在弹出框输入本仓库的名字，确认删除。</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2015/12/03/测试/" data-id="cim5sczqe000erfp06jiytxe0" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/24/git基本操作/" data-id="cim5sczqw000wrfp04pnl871f" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2016/03/12/编写html应当遵循的原则/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          编写html应当遵循的原则
-        
-      </div>
-    </a>
   
+    <a href="/2016/03/22/css实现水平垂直居中/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css实现水平垂直居中</div>
+    </a>
   
 </nav>
 
