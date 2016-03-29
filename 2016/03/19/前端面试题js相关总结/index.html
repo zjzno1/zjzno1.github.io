@@ -18,7 +18,7 @@
 数据封装类对象：Object、Array、Boolean、Number 和 String其他对象：Function、Arguments、Math、Date、RegExp、Error
 3. 说几条">
 <meta property="og:image" content="http://ww3.sinaimg.cn/mw690/a5152f55gw1f235pmmhmmj20lm0nqwfe.jpg">
-<meta property="og:updated_time" content="2016-03-20T04:13:15.000Z">
+<meta property="og:updated_time" content="2016-03-29T06:16:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题js相关总结">
 <meta name="twitter:description" content="js相关问题1. 介绍js的基本数据类型。Undefined、Null、Boolean、Number、String
@@ -183,8 +183,10 @@ wcDog.work();
 <span class="keyword">var</span> camry =<span class="keyword">new</span> Car(<span class="string">"凯美瑞"</span>,<span class="number">27</span>);
 camry.sell(); 
 </code></pre><h4 id="8-_Javascript作用链域?">8. Javascript作用链域?</h4><p>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。<br>当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，<br>直至全局函数，这种组织形式就是作用域链。</p>
-<h4 id="9-_谈谈This对象的理解。">9. 谈谈This对象的理解。</h4><h4 id="10-_eval是做什么的？">10. eval是做什么的？</h4><p>它的功能是把对应的字符串解析成JS代码并运行；<br>应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。</p>
-<h4 id="11-_什么是window对象?_什么是document对象?">11. 什么是window对象? 什么是document对象?</h4><h4 id="12-_null，undefined_的区别？">12. null，undefined 的区别？</h4><p>null        表示一个对象被定义了，值为“空值”；<br>undefined   表示不存在这个值。</p>
+<h4 id="9-_谈谈This对象的理解。">9. 谈谈This对象的理解。</h4><p>那就是this指的是，调用函数的那个对象。 </p>
+<h4 id="10-_eval是做什么的？">10. eval是做什么的？</h4><p>它的功能是把对应的字符串解析成JS代码并运行；<br>应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。</p>
+<h4 id="11-_什么是window对象?_什么是document对象?">11. 什么是window对象? 什么是document对象?</h4><p>Window – 代表浏览器中一个打开的窗口<br>document对象 – 代表整个HTML 文档,可用来访问页面中的所有元素</p>
+<h4 id="12-_null，undefined_的区别？">12. null，undefined 的区别？</h4><p>null        表示一个对象被定义了，值为“空值”；<br>undefined   表示不存在这个值。</p>
 <p>typeof undefined<br>    //“undefined”<br>    undefined :是一个表示”无”的原始值或者说表示”缺少值”，就是此处应该有一个值，但是还没有定义。当尝试读取时会返回 undefined；<br>    例如变量被声明了，但没有赋值时，就等于undefined</p>
 <p>typeof null<br>    //“object”<br>    null : 是一个对象(空对象, 没有任何属性和方法)；<br>    例如作为函数的参数，表示该函数的参数不是对象；</p>
 <p>注意：<br>    在验证null时，一定要使用　=== ，因为 == 无法分别 null 和　undefined</p>
@@ -330,7 +332,8 @@ markyun.Event = {
 <p>(1)创建XMLHttpRequest对象,也就是创建一个异步调用对象<br>(2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息<br>(3)设置响应HTTP请求状态变化的函数<br>(4)发送HTTP请求<br>(5)获取异步调用返回的数据<br>(6)使用JavaScript和DOM实现局部刷新</p>
 <h4 id="24-_同步和异步的区别?">24. 同步和异步的区别?</h4><p>同步：浏览器访问服务器请求，用户看得到页面刷新，重新发请求,等请求完，页面刷新，新内容出现，用户看到新内容,j进行下一步操作。<br>异步：浏览器访问服务器请求，用户正常操作，浏览器后端进行请求。等请求完，页面不刷新，新内容也会出现，用户看到新内容。</p>
 <h4 id="25-_如何解决跨域问题?">25. 如何解决跨域问题?</h4><p>jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页面(详见本博客跨域及解决办法)</p>
-<h4 id="26-_页面编码和被请求的资源编码如果不一致如何处理？">26. 页面编码和被请求的资源编码如果不一致如何处理？</h4><h4 id="27-_模块化开发怎么做？">27. 模块化开发怎么做？</h4><h4 id="28-_AMD（Modules/Asynchronous-Definition）、CMD（Common_Module_Definition）规范区别？">28. AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？</h4><p>AMD 规范在这里：<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="external">https://github.com/amdjs/amdjs-api/wiki/AMD</a><br>CMD 规范在这里：<a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a></p>
+<h4 id="26-_页面编码和被请求的资源编码如果不一致如何处理？">26. 页面编码和被请求的资源编码如果不一致如何处理？</h4><h4 id="27-_模块化开发怎么做？">27. 模块化开发怎么做？</h4><p>sea.js cmd amd 规范</p>
+<h4 id="28-_AMD（Modules/Asynchronous-Definition）、CMD（Common_Module_Definition）规范区别？">28. AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？</h4><p>AMD 规范在这里：<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="external">https://github.com/amdjs/amdjs-api/wiki/AMD</a><br>CMD 规范在这里：<a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a></p>
 <pre><code>Asynchronous Module Definition，异步模块定义，所有的模块将被异步加载，模块加载不影响后面语句运行。所有依赖某些模块的语句均放置在回调函数中。
 
  区别：
@@ -371,7 +374,9 @@ function <span class="sub"><span class="keyword">sub</span>(a,b)
 }
 
 add.call(<span class="sub"><span class="keyword">sub</span>,3,1);</span>
-</code></pre><h4 id="36-_数组和对象有哪些原生方法，列举一下？">36. 数组和对象有哪些原生方法，列举一下？</h4><h4 id="37-_数组和对象有哪些原生方法，列举一下？">37. 数组和对象有哪些原生方法，列举一下？</h4><h4 id="38-_JS_怎么实现一个类。怎么实例化这个类">38. JS 怎么实现一个类。怎么实例化这个类</h4><h4 id="39-_JavaScript中的作用域与变量声明提升？">39. JavaScript中的作用域与变量声明提升？</h4><h4 id="40-_如何编写高性能的Javascript？">40. 如何编写高性能的Javascript？</h4><h4 id="41-_那些操作会造成内存泄漏？">41. 那些操作会造成内存泄漏？</h4><h4 id="42-_JQuery的源码看过吗？能不能简单概况一下它的实现原理？">42. JQuery的源码看过吗？能不能简单概况一下它的实现原理？</h4><h4 id="43-_jQuery-fn的init方法返回的this指的是什么对象？为什么要返回this？">43. jQuery.fn的init方法返回的this指的是什么对象？为什么要返回this？</h4><h4 id="44-_jquery中如何将数组转化为json字符串，然后再转化回来？">44. jquery中如何将数组转化为json字符串，然后再转化回来？</h4><h4 id="45-_jQuery_的属性拷贝(extend)的实现原理是什么，如何实现深拷贝？">45. jQuery 的属性拷贝(extend)的实现原理是什么，如何实现深拷贝？</h4><h4 id="46-_jquery-extend_与_jquery-fn-extend的区别？">46. jquery.extend 与 jquery.fn.extend的区别？</h4><h4 id="47-_jQuery_的队列是如何实现的？队列可以用在哪些地方？">47. jQuery 的队列是如何实现的？队列可以用在哪些地方？</h4><h4 id="48-_谈一下Jquery中的bind(),live(),delegate(),on()的区别？">48. 谈一下Jquery中的bind(),live(),delegate(),on()的区别？</h4><h4 id="49-_JQuery一个对象可以同时绑定多个事件，这是如何实现的？">49. JQuery一个对象可以同时绑定多个事件，这是如何实现的？</h4><h4 id="50-_是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？">50. 是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？</h4><h4 id="51-_jQuery_是通过哪个方法和_Sizzle_选择器结合的？（jQuery-fn-find()进入Sizzle）">51. jQuery 是通过哪个方法和 Sizzle 选择器结合的？（jQuery.fn.find()进入Sizzle）</h4><h4 id="52-_针对_jQuery性能的优化方法？">52. 针对 jQuery性能的优化方法？</h4><h4 id="53-_Jquery与jQuery_UI_有啥区别？">53. Jquery与jQuery UI 有啥区别？</h4><p>*jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。</p>
+</code></pre><h4 id="36-_数组和对象有哪些原生方法，列举一下？">36. 数组和对象有哪些原生方法，列举一下？</h4><p>pop push sort join concat reverse shift isNaN split toLowerCase toUpperCase getDate getMonth等等。</p>
+<h4 id="37-_数组和对象有哪些原生方法，列举一下？">37. 数组和对象有哪些原生方法，列举一下？</h4><p>重复，同上。</p>
+<h4 id="38-_JS_怎么实现一个类。怎么实例化这个类">38. JS 怎么实现一个类。怎么实例化这个类</h4><h4 id="39-_JavaScript中的作用域与变量声明提升？">39. JavaScript中的作用域与变量声明提升？</h4><h4 id="40-_如何编写高性能的Javascript？">40. 如何编写高性能的Javascript？</h4><h4 id="41-_那些操作会造成内存泄漏？">41. 那些操作会造成内存泄漏？</h4><h4 id="42-_JQuery的源码看过吗？能不能简单概况一下它的实现原理？">42. JQuery的源码看过吗？能不能简单概况一下它的实现原理？</h4><h4 id="43-_jQuery-fn的init方法返回的this指的是什么对象？为什么要返回this？">43. jQuery.fn的init方法返回的this指的是什么对象？为什么要返回this？</h4><h4 id="44-_jquery中如何将数组转化为json字符串，然后再转化回来？">44. jquery中如何将数组转化为json字符串，然后再转化回来？</h4><h4 id="45-_jQuery_的属性拷贝(extend)的实现原理是什么，如何实现深拷贝？">45. jQuery 的属性拷贝(extend)的实现原理是什么，如何实现深拷贝？</h4><h4 id="46-_jquery-extend_与_jquery-fn-extend的区别？">46. jquery.extend 与 jquery.fn.extend的区别？</h4><h4 id="47-_jQuery_的队列是如何实现的？队列可以用在哪些地方？">47. jQuery 的队列是如何实现的？队列可以用在哪些地方？</h4><h4 id="48-_谈一下Jquery中的bind(),live(),delegate(),on()的区别？">48. 谈一下Jquery中的bind(),live(),delegate(),on()的区别？</h4><h4 id="49-_JQuery一个对象可以同时绑定多个事件，这是如何实现的？">49. JQuery一个对象可以同时绑定多个事件，这是如何实现的？</h4><h4 id="50-_是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？">50. 是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？</h4><h4 id="51-_jQuery_是通过哪个方法和_Sizzle_选择器结合的？（jQuery-fn-find()进入Sizzle）">51. jQuery 是通过哪个方法和 Sizzle 选择器结合的？（jQuery.fn.find()进入Sizzle）</h4><h4 id="52-_针对_jQuery性能的优化方法？">52. 针对 jQuery性能的优化方法？</h4><h4 id="53-_Jquery与jQuery_UI_有啥区别？">53. Jquery与jQuery UI 有啥区别？</h4><p>*jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。</p>
 <p>*jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。<br> 提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等</p>
 <h4 id="54-_JQuery的源码看过吗？能不能简单说一下它的实现原理？">54. JQuery的源码看过吗？能不能简单说一下它的实现原理？</h4><h4 id="55-_jquery_中如何将数组转化为json字符串，然后再转化回来？">55. jquery 中如何将数组转化为json字符串，然后再转化回来？</h4><p>jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：</p>
 <pre><code>$.fn.stringifyArray = <span class="function"><span class="keyword">function</span>(<span class="params">array</span>) </span>{
@@ -406,7 +411,7 @@ $(<span class="string">""</span>).stringifyArray(array)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/19/前端面试题js相关总结/" data-id="cim5v6hby000guvp0ib1pra4j" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/19/前端面试题js相关总结/" data-id="cimd0k8hm000g50serpdth4hc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a></li></ul>
