@@ -65,6 +65,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-前端面试题html相关总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/17/前端面试题html相关总结/" class="article-date">
+  <time datetime="2016-03-17T07:27:09.000Z" itemprop="datePublished">2016-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/17/前端面试题html相关总结/">前端面试题html相关总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="HTML_相关问题：">HTML 相关问题：</h3><h4 id="1-_doctype(文档类型)_的作用是什么？">1. doctype(文档类型) 的作用是什么？</h4><p>（1）&lt;!DOCTYPE&gt;声明位于位于HTML文档中的第一行，处于 <code>&lt;html&gt;</code> 标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式（怪异模式）呈现。<br>（2）标准模式的排版和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。</p>
+<h4 id="2-_HTML5_为什么只需要写&lt;!DOCTYPE_html&gt;？">2. HTML5 为什么只需要写&lt;!DOCTYPE html&gt;？</h4><p> HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；<br> 而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。</p>
+<h4 id="3-_浏览器标准模式_(standards_mode)_和怪异模式_(quirks_mode)_之间的区别是什么？">3. 浏览器标准模式 (standards mode) 和怪异模式 (quirks mode) 之间的区别是什么？</h4><p>所谓的标准模式是指，浏览器按W3C标准解析执行代码；怪异模式则是使用浏览器自己的方式解析执行代码，因为不同浏览器解析执行的方式不一样，所以我们称之为怪异模式。浏览器解析时到底使用标准模式还是怪异模式，与你网页中的DTD声明直接相关，DTD声明定义了标准文档的类型（标准模式解析）文档类型，会使浏览器使用相应的方式加载网页并显示，忽略DTD声明,将使网页进入怪异模式(quirks mode)。</p>
+<h4 id="3-_HTML_和_XHTML_有什么区别？">3. HTML 和 XHTML 有什么区别？</h4><p>相较HTML，XHTML有着更严格的语法，<br>XHTML 元素必须被正确地嵌套。<br>XHTML 元素必须被关闭。<br>标签名必须用小写字母。<br>XHTML 文档必须拥有根元素。<br>因为xml的解析语法过于苛刻，只要网页中出现一处错误，则浏览器停止解析。违背了网页设计的一个基本原理，即“发送时要保守，接收时要开放。”，于是xhtml2.0项目最终流产，被html5所取代。 </p>
+<h4 id="4-_如果页面使用_‘application/xhtml+xml’_会有什么问题吗？">4. 如果页面使用 ‘application/xhtml+xml’ 会有什么问题吗？</h4><p>要求比较严格，必须有head、body标签且每个元素必须是关闭的。<br>一些老的浏览器不支持，实际上，任何最新的浏览器都将支持application/xhtml+xml媒体类型。大多数浏览器也接受以application/xml发送的XHTML文档。</p>
+<h4 id="5-_如果网页内容需要支持多语言，你会怎么做？">5. 如果网页内容需要支持多语言，你会怎么做？</h4><p>采用统一编码UTF-8方式编码<br>navigator.language 可以返回用户设置的用户首选语言，然后根据用户首选语言执行js操作<br><a href="https://translate.google.com/manager/website/" target="_blank" rel="external">Google提供的网站翻译器</a><br>或<br>一个可以用域名跳转，不同的语言版本跳转到不同的域名<br>另一个可以通过浏览器发送带 accept-language 头部信息的请求请求不同版本的页面文档</p>
+<h4 id="6-_在设计和开发多语言网站时，有哪些问题你必须要考虑？">6. 在设计和开发多语言网站时，有哪些问题你必须要考虑？</h4><p>  （1） 应用字符集的选择<br>       对提供了多语言版本的网站来说，Unicode字符集应该是最理想的选择。<br>  （2） 语言书写习惯&amp;导航结构<br>  （3） 数据库驱动型网站<br>  （4） 搜索引擎&amp;市场推广</p>
+<h4 id="7-_data-属性的作用是什么？">7. data-属性的作用是什么？</h4><p>data- 属性使 HTML 有了存储数据的能力，它让 HTML 更加灵活，JavaScript 可以通过 dataset 方法访问到 data- 的自定义属性，CSS 中也可以通过 attr 方法来引用 data- 属性的值。</p>
+<pre><code>&lt;div data-author=<span class="string">"david"</span> data-time=<span class="string">"2011-06-20"</span> data-comment-<span class="built_in">num</span>=<span class="string">"10"</span>&gt;...&lt;/div&gt;
+<span class="keyword">var</span> post = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];
+post.dataset; <span class="comment">// DOMStringMap</span>
+post.dataset.commentNum; <span class="comment">// 10</span>
+</code></pre><h4 id="8-_如果把_HTML5_看作做一个开放平台，那它的构建模块有哪些？">8. 如果把 HTML5 看作做一个开放平台，那它的构建模块有哪些？</h4><p><code>&lt;nav&gt;, &lt;header&gt;,&lt;section&gt;, &lt;footer&gt;</code> </p>
+<h4 id="9-_请描述_cookies、sessionStorage_和_localStorage_的区别。">9. 请描述 cookies、sessionStorage 和 localStorage 的区别。</h4><p>cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。<br>cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。<br>sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。</p>
+<p>存储大小：<br>    cookie数据大小不能超过4k。<br>    sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。</p>
+<p>有期时间：<br>    localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；<br>    sessionStorage  数据在当前浏览器窗口关闭后自动删除。<br>    cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭</p>
+<h4 id="10-_请解释&lt;script&gt;、&lt;script_async&gt;_和_&lt;script_defer&gt;_的区别。">10. 请解释<code>&lt;script&gt;、&lt;script async&gt;</code> 和 <code>&lt;script defer&gt;</code> 的区别。</h4><p>普通脚本加载方式在加载和执行时会阻塞页面的渲染，async 和 defer 方式是用异步的方式加载脚本，不会阻塞页面渲染，它们之间的不同在于何时执行，async 方式是加载后马上执行，defer 方式是加载后等所有 DOM 都渲染好触发 DOMContentLoaded 事件之前执行，所以 async 方式里面的脚本都是乱序执行，defer 方式加载的代码都是按序执行的，按序执行对有依赖的代码非常重要。<br>若两个属性同在，会忽略defer而遵从async</p>
+<h4 id="11-_为什么通常推荐将_CSS_&lt;link&gt;_放置在_&lt;head&gt;&lt;/head&gt;_之间，而将_JS_&lt;script&gt;_放置在_&lt;/body&gt;_之前？你知道相关解释吗？">11. 为什么通常推荐将 CSS <code>&lt;link&gt;</code> 放置在 <code>&lt;head&gt;&lt;/head&gt;</code> 之间，而将 JS <code>&lt;script&gt;</code> 放置在 <code>&lt;/body&gt;</code> 之前？你知道相关解释吗？</h4><p>浏览器从上到下依次解析html文档。将 css 文件放到头部， css 文件可以先加载。避免先加载 body 内容，导致页面一开始样式错乱，然后闪烁。将 javascript 文件放到底部是因为：若将 javascript 文件放到 head 里面，就意味着必须等到所有的 javascript 代码都被 下载、解析和执行完成 之后才开始呈现页面内容。这样就会造成呈现页面时出现明显的延迟，窗口一片空白。为避免这样的问题一般将全部 javascript 文件放到 body 元素中页面内容的后面。</p>
+<h4 id="12-_什么是渐进式渲染_(progressive_rendering)？">12. 什么是渐进式渲染 (progressive rendering)？</h4><p>渐进式渲染是指浏览器不用等待所有页面资源都渲染好之后再呈现给用户看，而是边下载边渲染，所以用户打开一个网页的时候往往不能第一时间看到所有的内容，但是能够看到一个大概的样子，后续的内容浏览器会慢慢补上形成一个完整的页面。这个有点像 bigpipe。</p>
+<h4 id="13-_你用过哪些不同的_HTML_模板引擎？">13. 你用过哪些不同的 HTML 模板引擎？</h4><p>这个有很多，各大前端框架组件基本都可以叫模版引擎，自己用过什么说说什么。<br>比喻jQuery，Backbone，Anguar, React，bootstarp等等。</p>
+<h4 id="14-_行内元素有哪些？块级元素有哪些？_空(void)元素有那些？">14. 行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？</h4><p>首先：CSS规范规定，每个元素都有display属性，确定该元素的类型，每个元素都有默认的display值，如div的display默认值为“block”，则为“块级”元素；span默认display属性值为“inline”，是“行内”元素。<br>（1）行内元素有：a b span img input select strong（强调的语气）<br>（2）块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p<br>（3）常见的空元素：<br>    <code>&lt;br&gt; &lt;hr&gt; &lt;img&gt; &lt;input&gt; &lt;link&gt; &lt;meta&gt;</code><br>    鲜为人知的是：<br>    <code>&lt;area&gt; &lt;base&gt; &lt;col&gt; &lt;command&gt; &lt;embed&gt; &lt;keygen&gt; &lt;param&gt; &lt;source&gt; &lt;track&gt; &lt;wbr&gt;</code></p>
+<h4 id="15-_页面导入样式时，使用link和@import有什么区别？">15. 页面导入样式时，使用link和@import有什么区别？</h4><p> (1)link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;<br>（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;<br>（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;</p>
+<h4 id="16-_介绍一下你对浏览器内核的理解？">16. 介绍一下你对浏览器内核的理解？</h4><p>主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。<br>渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。<br>JS引擎则：解析和执行javascript来实现网页的动态效果。<br>最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。</p>
+<h4 id="17-_常见的浏览器内核有哪些？">17. 常见的浏览器内核有哪些？</h4><p>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]<br>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等<br>Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]<br>Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]</p>
+<h4 id="18-_html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分_HTML_和_HTML5？">18. html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？</h4><ul>
+<li>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>绘画 canvas;<br>用于媒介回放的 video 和 audio 元素;<br>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;<br>sessionStorage 的数据在浏览器关闭后自动删除;<br>语意化更好的内容元素，比如 article、footer、header、nav、section;<br>表单控件，calendar、date、time、email、url、search;<br>新的技术webworker, websockt, Geolocation;<br>移除的元素：<br>纯表现的元素：basefont，big，center，font, s，strike，tt，u;<br>对可用性产生负面影响的元素：frame，frameset，noframes；</li>
+<li><p>支持HTML5新标签：<br>   IE8/IE7/IE6支持通过document.createElement方法产生的标签，<br>   可以利用这一特性让这些浏览器支持HTML5新标签，<br>   浏览器支持新标签后，还需要添加标签默认的样式。</p>
+<p>   当然最好的方式是直接使用成熟的框架、比如html5shim;</p>
+<pre><code><span class="comment">&lt;!--[if lt IE 9]&gt;
+   &lt;script&gt; src="http://html5shim.googlecode.com/svn/trunk/html5.js"&lt;/script&gt;
+&lt;![endif]--&gt;</span>
+</code></pre></li>
+<li><p>如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素</p>
+</li>
+</ul>
+<h4 id="19-_简述一下你对HTML语义化的理解？">19. 简述一下你对HTML语义化的理解？</h4><p>用正确的标签做正确的事情。<br>html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;<br>及时在没有样式CCS情况下也以一种文档格式显示，并且是容易阅读的;<br>搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;<br>使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。</p>
+<h4 id="20-_HTML5的离线储存怎么使用，工作原理能不能解释一下？">20. HTML5的离线储存怎么使用，工作原理能不能解释一下？</h4><p>在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。<br>原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。</p>
+<p>如何使用：<br>1、页面头部像下面一样加入一个manifest的属性；<br>2、在cache.manifest文件的编写离线存储的资源；</p>
+<pre><code>CACHE MANIFEST
+<span class="id">#v0</span>.<span class="number">11</span>
+CACHE:
+js/app<span class="class">.js</span>
+css/style<span class="class">.css</span>
+NETWORK:
+resourse/logo<span class="class">.png</span>
+FALLBACK:
+/ /offline.html
+</code></pre><p>3、在离线状态时，操作window.applicationCache进行需求实现。</p>
+<h4 id="21-_浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？">21. 浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？</h4><p>在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。<br>离线的情况下，浏览器就直接使用离线存储的资源。</p>
+<h4 id="22-_iframe有那些缺点？">22. iframe有那些缺点？</h4><p><em>iframe会阻塞主页面的Onload事件；
+</em>搜索引擎的检索程序无法解读这种页面，不利于SEO;<br>*iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。<br>使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript<br>动态给iframe添加src属性值，这样可以绕开以上两个问题。</p>
+<h4 id="23-_Label的作用是什么？是怎么用的？">23. Label的作用是什么？是怎么用的？</h4><p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
+<pre><code>&lt;<span class="keyword">label</span> <span class="keyword">for</span>=<span class="string">"Name"</span>&gt;Number:&lt;/<span class="keyword">label</span>&gt;
+&lt;<span class="keyword">input</span> <span class="keyword">type</span>=“text“name=<span class="string">"Name"</span> id=<span class="string">"Name"</span>/&gt;
+
+&lt;<span class="keyword">label</span>&gt;Date:&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"text"</span> name=<span class="string">"B"</span>/&gt;&lt;/<span class="keyword">label</span>&gt;
+</code></pre><h4 id="24-_HTML5的form如何关闭自动完成功能？">24. HTML5的form如何关闭自动完成功能？</h4><p>给不想要提示的 form 或下某个input 设置为 autocomplete=off。</p>
+<h4 id="25-_如何实现浏览器内多个标签页之间的通信?_(阿里)">25. 如何实现浏览器内多个标签页之间的通信? (阿里)</h4><p>调用localstorge、cookies等本地存储方式</p>
+<h4 id="26-_webSocket如何兼容低浏览器？(阿里)">26. webSocket如何兼容低浏览器？(阿里)</h4><p>Adobe Flash Socket 、<br>ActiveX HTMLFile (IE) 、<br>基于 multipart 编码发送 XHR 、<br>基于长轮询的 XHR</p>
+<h4 id="27-_页面可见性（Page_Visibility）API_可以有哪些用途？">27. 页面可见性（Page Visibility）API 可以有哪些用途？</h4><p>在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；</p>
+<h4 id="28-_如何在页面上实现一个圆形的可点击区域？">28. 如何在页面上实现一个圆形的可点击区域？</h4><p>1、map+area或者svg<br>2、border-radius<br>3、纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等</p>
+<h4 id="29-_实现不使用_border_画出1px高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果。">29. 实现不使用 border 画出1px高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果。</h4><pre><code>&lt;<span class="keyword">div</span> style=<span class="string">"height:1px;overflow:hidden;background:#ccc"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
+</code></pre><h4 id="30-_网页验证码是干嘛的，是为了解决什么安全问题。">30. 网页验证码是干嘛的，是为了解决什么安全问题。</h4><p>区分用户是计算机还是人的公共全自动程序。可以防止：恶意破解密码、刷票、论坛灌水；<br>有效防止黑客对某一个特定注册用户用特定程序暴力破解方式进行不断的登陆尝试；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/" data-id="ciqrszb5y000rp6p0sdccxmjr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-跨域及解决办法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/14/跨域及解决办法/" class="article-date">
@@ -91,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/14/跨域及解决办法/" data-id="ciqknqyjf0003lep0poneq9x2" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/14/跨域及解决办法/" data-id="ciqrszb5a0009p6p05sclja0m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/13/css盒模型/" data-id="ciqknqykj0012lep0878uh2ek" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/13/css盒模型/" data-id="ciqrszb6i0018p6p072ayt9vf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -176,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/12/chrome开发者模式教程/" data-id="ciqknqyie0000lep0qpcv8deo" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/12/chrome开发者模式教程/" data-id="ciqrszb6m001bp6p0c0tskzly" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
@@ -243,7 +344,7 @@ aria-* , role
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/12/编写html应当遵循的原则/" data-id="ciqknqyjj0004lep0tgjae7wf" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/12/编写html应当遵循的原则/" data-id="ciqrszb5j000ap6p0ypanbn4p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文章/">文章</a></li></ul>
@@ -290,7 +391,7 @@ aria-* , role
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2015/12/03/测试/" data-id="ciqknqyjp000elep04kbhyk98" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2015/12/03/测试/" data-id="ciqrszb5q000kp6p073kuuai4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +423,7 @@ aria-* , role
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -331,7 +432,7 @@ aria-* , role
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 20px;">面试题（知识点）总结</a>
+      <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 20px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -340,7 +441,7 @@ aria-* , role
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -352,7 +453,11 @@ aria-* , role
       <ul>
         
           <li>
-            <a href="/2016/07/13/第一篇博客/">第一篇博客</a>
+            <a href="/2016/07/18/第一篇博客/">第一篇博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/15/MVC与MVVM模型理解/">MVC、MVP与MVVM模型理解</a>
           </li>
         
           <li>
@@ -365,10 +470,6 @@ aria-* , role
         
           <li>
             <a href="/2016/03/22/css实现水平垂直居中/">css实现水平垂直居中</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/22/事件捕获与事件冒泡/">事件捕获与事件冒泡</a>
           </li>
         
       </ul>
