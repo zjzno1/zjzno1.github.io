@@ -5,16 +5,22 @@
   
   <title>node中n的使用——版本控制 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端、web、js、html">
+  <meta name="description" content="在node开发中，有时候会遇到这样一些情况：
+一些工程要求低版本的node，而一些工程要求高版本的node，因此出来这样一个需求，那就是node的版本控制，要求在想要的时候可以切换到相应的node版本，且各个版本之间互不干扰。
+基于这一需求，网上给出两种答案，一是用nvm进行node的版本控制管理，二是用n进行node的版本控制管理，在权衡完nvm与n的利弊之后，笔者选择了n作为node的版本控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="node中n的使用——版本控制">
 <meta property="og:url" content="http://zjzno1.github.io/2016/07/26/node中n的使用——版本控制/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="前端、web、js、html">
-<meta property="og:updated_time" content="2016-08-25T00:31:48.000Z">
+<meta property="og:description" content="在node开发中，有时候会遇到这样一些情况：
+一些工程要求低版本的node，而一些工程要求高版本的node，因此出来这样一个需求，那就是node的版本控制，要求在想要的时候可以切换到相应的node版本，且各个版本之间互不干扰。
+基于这一需求，网上给出两种答案，一是用nvm进行node的版本控制管理，二是用n进行node的版本控制管理，在权衡完nvm与n的利弊之后，笔者选择了n作为node的版本控制">
+<meta property="og:updated_time" content="2016-08-26T01:46:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node中n的使用——版本控制">
-<meta name="twitter:description" content="前端、web、js、html">
+<meta name="twitter:description" content="在node开发中，有时候会遇到这样一些情况：
+一些工程要求低版本的node，而一些工程要求高版本的node，因此出来这样一个需求，那就是node的版本控制，要求在想要的时候可以切换到相应的node版本，且各个版本之间互不干扰。
+基于这一需求，网上给出两种答案，一是用nvm进行node的版本控制管理，二是用n进行node的版本控制管理，在权衡完nvm与n的利弊之后，笔者选择了n作为node的版本控制">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -86,11 +92,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>在node开发中，有时候会遇到这样一些情况：</p>
+<p>一些工程要求低版本的node，而一些工程要求高版本的node，因此出来这样一个需求，那就是node的版本控制，要求在想要的时候可以切换到相应的node版本，且各个版本之间互不干扰。</p>
+<p>基于这一需求，网上给出两种答案，一是用nvm进行node的版本控制管理，二是用n进行node的版本控制管理，在权衡完nvm与n的利弊之后，笔者选择了n作为node的版本控制工具。原因如下：</p>
+<p>相比nvm，n更轻量，且n的操作更简单。但n也有弊端，那就是n是依赖于npm下的包，在想装n之前，要先装一个node环境。</p>
+<p>安装n</p>
+<pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> <span class="keyword">n</span></span>
+</code></pre><p>安装指定的node版本</p>
+<pre><code>n <span class="operator"><span class="keyword">install</span> &lt;<span class="keyword">version</span>&gt;</span>
+</code></pre><p>选择指定的node版本</p>
+<pre><code><span class="keyword">n</span> <span class="comment">//这时出现了安装过的node的版本号，按上下键选择相应的版本，回车</span>
+node -v <span class="comment">//查看当前node版本号</span>
+</code></pre><p>删除指定的node版本</p>
+<pre><code><span class="keyword">n</span> <span class="keyword">rm</span> &lt;<span class="keyword">version</span>&gt;
+</code></pre><p>在n安装过程中遇到的一些问题：</p>
+<p>安装n后选择node版本号失效。呃。。。对于这个问题。。笔者的解决方法是删除所有node环境重新安装，然后成功。初步估计是路径问题。</p>
+<p>碰到 dyld:bad external relocation length Trace/BPT trap: 5</p>
+<p>这个问题也困扰了我比较长的时间，最后看到overstackflow上有个兄弟给出了一个解决的方案，在终端中输入</p>
+<pre><code><span class="title">n</span> latest 
+</code></pre><p>将版本更新到最新，然后node -v就是最新的版本，然后把出问题的版本删除，成功解决。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/26/node中n的使用——版本控制/" data-id="cis9ltlad0019rjp0ii93auf6" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/07/26/node中n的使用——版本控制/" data-id="cisb2aq7m0013n3p00o5rj9w8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
@@ -138,7 +163,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -147,7 +172,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 16.67px;">面试题（知识点）总结</a>
+      <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 16.67px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -156,7 +181,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -172,19 +197,19 @@
           </li>
         
           <li>
+            <a href="/2016/08/25/gulp使用指南/">gulp使用指南</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/25/express中next-的理解/">express中next()的理解</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/22/js正则表达式学习笔记/">js正则表达式学习笔记</a>
           </li>
         
           <li>
             <a href="/2016/08/11/js中的call和apply/">js中的call和apply</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/11/js回调函数/">js回调函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/26/一些优秀的文章-1/">一些优秀的文章以及资源</a>
           </li>
         
       </ul>
