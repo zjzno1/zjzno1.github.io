@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="极昼博客">
 <meta property="og:description" content="早就听说过MVC,MCP,MVVM模型，但一直只知其一，不知其二。这几天终于找机会实力查了一波资料，好好的了解了一下，下面就聊一聊这三种模型，如有不对，欢迎大家指正。
  首先来说一下MVC框架，就是经典的Model，view，controller，最早提出于上世纪80年代。一般来说，Model提供数据，view是向用户展示的界面，而controller，以及用Model中的数据是Model和Vie">
-<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/28d29ef2d8fd25ea59b3a7fd2420e3cd?fid=1577492174-250528-798726621202023&time=1468918800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-xJMsaVw7KFBhNWwdKF1qOZsdn%2FQ%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=4655406297105046599&dp-callid=0&size=c710_u400&quality=100">
-<meta property="og:updated_time" content="2016-07-19T09:25:48.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/zjzno1/img/master/mvvm.jpeg">
+<meta property="og:updated_time" content="2016-08-26T05:51:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVC、MVP与MVVM模型理解">
 <meta name="twitter:description" content="早就听说过MVC,MCP,MVVM模型，但一直只知其一，不知其二。这几天终于找机会实力查了一波资料，好好的了解了一下，下面就聊一聊这三种模型，如有不对，欢迎大家指正。
@@ -115,13 +115,13 @@ window.onload = C.handleOnload;
 </ol>
 <p>在经典MVC中，一对controller-view捆绑起来表示一个ui组件，controller直接接受用户输入，并将输入转为相应命令来调用model的接口，对model的状态进行修改，最后通过观察者模式对view进行重新渲染。而MVP是修改controller-view的捆绑关系，为了解决controller-view的捆绑关系，将进行改造，使view不仅拥有UI组件的结构，还拥有处理用户事件的能力，这样就能将controller独立出来。为了对用户事件进行统一管理，view只负责将用户产生的事件传递给controller，由controller来统一处理，这样的好处是多个view可共用同一个controller。总结而言，即提升了controller的作用，把他从ui组件中提取出来，进而成为一个可以通用的逻辑处理程序。</p>
 <p>MVVM —— Model-View-ViewModel</p>
-<p>这个让我们来看一下下图：<br><img src="https://thumbnail0.baidupcs.com/thumbnail/28d29ef2d8fd25ea59b3a7fd2420e3cd?fid=1577492174-250528-798726621202023&amp;time=1468918800&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-xJMsaVw7KFBhNWwdKF1qOZsdn%2FQ%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=4655406297105046599&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100" alt=""></p>
+<p>这个让我们来看一下下图：<br><img src="https://raw.githubusercontent.com/zjzno1/img/master/mvvm.jpeg" alt=""></p>
 <p>view和model是不知道彼此存在的，同MVP一样，将view和model清晰地分离开来。 其次，view是对viewmodel的外在显示，与viewmodel保持同步，viewmodel对象可以看作是view的上下文。view绑定到viewmodel的属性上，如果viewmodel中的属性值变化了，这些新值通过数据绑定会自动传递给view。反过来viewmodel会暴露model中的数据和特定状态给view。 所以，view不知道model的存在，viewmodel和model也觉察不到view。事实上，model也完全忽略viewmodel和view的存在。这是一个非常松散耦合的设计。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/15/MVC、MVP与MVVM模型理解/" data-id="cisb2aq660000n3p0avdpi9du" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/07/15/MVC、MVP与MVVM模型理解/" data-id="cisbccisd0000gkp0yz17gzdq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/">MVP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVVM/">MVVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模型/">模型</a></li></ul>
