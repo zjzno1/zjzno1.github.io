@@ -3,48 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>css实现水平垂直居中 | 极昼博客</title>
+  <title>关于nodejs的调试 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="废话不多说，直接上代码父级元素position属性设置为 relativebody {
-    height:100%;
-    width:100%;
-}
-div-one {
-    position:relative;
-    height:100px;
-    width:100px;
-}
-子元素cssdiv-one-content {
-    position: absolute;">
+  <meta name="description" content="最近使用了nodejs写程序，但是之前调试都是在程序源码中打印console.log来查看变量或者代替断点，这样在每次修改完之后要重启服务，并且相对来说比较繁琐耗时，因此上网探索了一下nodejs的调试相关内容，把学到的东西整理一下。
+因为项目是用express搭的，因此直接说怎么调试express（其实调试单个文件也同理）。
+在搭建好node开发环境的前提下，首先要在全局安装node-inspe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css实现水平垂直居中">
-<meta property="og:url" content="http://zjzno1.github.io/2016/03/22/css实现水平垂直居中/index.html">
+<meta property="og:title" content="关于nodejs的调试">
+<meta property="og:url" content="http://zjzno1.github.io/2016/09/05/关于nodejs的调试/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="废话不多说，直接上代码父级元素position属性设置为 relativebody {
-    height:100%;
-    width:100%;
-}
-div-one {
-    position:relative;
-    height:100px;
-    width:100px;
-}
-子元素cssdiv-one-content {
-    position: absolute;">
-<meta property="og:updated_time" content="2016-08-26T01:12:42.000Z">
+<meta property="og:description" content="最近使用了nodejs写程序，但是之前调试都是在程序源码中打印console.log来查看变量或者代替断点，这样在每次修改完之后要重启服务，并且相对来说比较繁琐耗时，因此上网探索了一下nodejs的调试相关内容，把学到的东西整理一下。
+因为项目是用express搭的，因此直接说怎么调试express（其实调试单个文件也同理）。
+在搭建好node开发环境的前提下，首先要在全局安装node-inspe">
+<meta property="og:updated_time" content="2016-09-05T03:10:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css实现水平垂直居中">
-<meta name="twitter:description" content="废话不多说，直接上代码父级元素position属性设置为 relativebody {
-    height:100%;
-    width:100%;
-}
-div-one {
-    position:relative;
-    height:100px;
-    width:100px;
-}
-子元素cssdiv-one-content {
-    position: absolute;">
+<meta name="twitter:title" content="关于nodejs的调试">
+<meta name="twitter:description" content="最近使用了nodejs写程序，但是之前调试都是在程序源码中打印console.log来查看变量或者代替断点，这样在每次修改完之后要重启服务，并且相对来说比较繁琐耗时，因此上网探索了一下nodejs的调试相关内容，把学到的东西整理一下。
+因为项目是用express搭的，因此直接说怎么调试express（其实调试单个文件也同理）。
+在搭建好node开发环境的前提下，首先要在全局安装node-inspe">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -94,10 +70,10 @@ div-one {
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-css实现水平垂直居中" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-关于nodejs的调试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/03/22/css实现水平垂直居中/" class="article-date">
-  <time datetime="2016-03-22T02:58:28.000Z" itemprop="datePublished">2016-03-22</time>
+    <a href="/2016/09/05/关于nodejs的调试/" class="article-date">
+  <time datetime="2016-09-05T02:44:49.000Z" itemprop="datePublished">2016-09-05</time>
 </a>
     
   </div>
@@ -108,7 +84,7 @@ div-one {
         
   
     <h1 class="article-title" itemprop="name">
-      css实现水平垂直居中
+      关于nodejs的调试
     </h1>
   
 
@@ -116,33 +92,29 @@ div-one {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="废话不多说，直接上代码">废话不多说，直接上代码</h5><h5 id="父级元素position属性设置为_relative">父级元素position属性设置为 relative</h5><pre><code><span class="tag">body</span> <span class="rules">{
-    <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100%</span></span></span>;
-    <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100%</span></span></span>;
-}</span>
-<span class="tag">div-one</span> <span class="rules">{
-    <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>;
-    <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;
-    <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100px</span></span></span>;
-}</span>
-</code></pre><h5 id="子元素css">子元素css</h5><pre><code><span class="tag">div-one-content</span> <span class="rules">{
-    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
-    <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;
-    <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100px</span></span></span>;
-    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#cbcb04</span></span></span>;
-    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;
-    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;
-    <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">50px</span></span></span>;
-    <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">50px</span></span></span>;
-}</span>
-</code></pre><h5 id="这样子元素就在父元素中居中">这样子元素就在父元素中居中</h5>
+        <p>最近使用了nodejs写程序，但是之前调试都是在程序源码中打印console.log来查看变量或者代替断点，这样在每次修改完之后要重启服务，并且相对来说比较繁琐耗时，因此上网探索了一下nodejs的调试相关内容，把学到的东西整理一下。</p>
+<p>因为项目是用express搭的，因此直接说怎么调试express（其实调试单个文件也同理）。</p>
+<p>在搭建好node开发环境的前提下，首先要在全局安装node-inspector，</p>
+<pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> node-inspector</span>
+</code></pre><p>然后再安装supervisor（这是一个修改代码保存后自动刷新的插件，免去了每次修改代码后都要重新启动服务的烦恼，如果想了解详情，请自行百度（谷歌）supervisor^_^）</p>
+<pre><code>sudo install supervisor
+<span class="comment">//mac上加sudo，否则有时会出错（因为权限问题）</span>
+</code></pre><p>接下来就要正是进行nodejs的调试了</p>
+<pre><code>supervisor --<span class="keyword">debug</span> ./bin/www
+<span class="comment">//在终端中的项目目录下输入这句话回车，监听程序启动，express也跑起来了</span>
+</code></pre><p>打开<a href="http://localhost:3000/，就可以看到启动的express了。" target="_blank" rel="external">http://localhost:3000/，就可以看到启动的express了。</a></p>
+<p>再打开一个新的终端，cd到文件目录下，执行</p>
+<pre><code>node-inspector &amp;
+</code></pre><p>这时出现一个地址，复制地址到chrome中打开，就可以看到类似chrome开发者工具的东西了，在这里，可以进行设置断点，查看变量等操作，完美调试nodejs程序。</p>
+<p>over (^_^)</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/22/css实现水平垂直居中/" data-id="cispgyquf002jwlp0wkxgbrnr" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/09/05/关于nodejs的调试/" data-id="cispgyqtf0010wlp0ai4q57lf" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
 
     </footer>
   </div>
@@ -150,19 +122,19 @@ div-one {
     
 <nav id="article-nav">
   
-    <a href="/2016/03/24/git基本操作/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2116/03/19/第一篇博客/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          git基本操作
+          第一篇博客
         
       </div>
     </a>
   
   
-    <a href="/2016/03/22/js事件捕获与事件冒泡/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/25/gulp使用指南/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">js事件冒泡与事件捕获</div>
+      <div class="article-nav-title">gulp使用指南</div>
     </a>
   
 </nav>
