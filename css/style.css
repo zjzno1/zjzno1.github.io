@@ -34,7 +34,7 @@ body {
   padding-top: 20px; }
 
 a, button.submit {
-  color: #2db7f5;
+  color: #6E7173;
   text-decoration: none;
   -webkit-transition: all .1s ease-in;
   -moz-transition: all .1s ease-in;
@@ -42,7 +42,7 @@ a, button.submit {
   transition: all .1s ease-in; }
 
 a:hover, a:active {
-  color: #00a0e8; }
+  color: #444; }
 
 a:focus {
   outline: auto; }
@@ -1537,3 +1537,9 @@ em.search-keyword {
   font-weight: bold;
   font-style: normal;
   color: #01579f; }
+
+a {
+  color: #2db7f5; }
+
+a:hover {
+  color: #00a0e8; }
