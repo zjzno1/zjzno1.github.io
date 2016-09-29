@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  *
  * @package Maupassant
@@ -33,7 +34,7 @@ body {
   padding-right: 50px;
   padding-top: 20px; }
 
-a, button.submit {
+button.submit {
   color: #6E7173;
   text-decoration: none;
   -webkit-transition: all .1s ease-in;
@@ -41,8 +42,11 @@ a, button.submit {
   -o-transition: all .1s ease-in;
   transition: all .1s ease-in; }
 
+a {
+  color: #2db7f5；; }
+
 a:hover, a:active {
-  color: #444; }
+  color: #00a0e8; }
 
 a:focus {
   outline: auto; }
