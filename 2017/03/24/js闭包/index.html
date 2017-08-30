@@ -11,9 +11,8 @@ function a() {
     function b() {
         console.log(n)
     }
-    return ;
-}
-var">
+    return b();
+}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js闭包">
 <meta property="og:url" content="http://zjzno1.github.io/2017/03/24/js闭包/index.html">
@@ -24,10 +23,9 @@ function a() {
     function b() {
         console.log(n)
     }
-    return ;
-}
-var">
-<meta property="og:updated_time" content="2017-08-30T01:48:40.000Z">
+    return b();
+}">
+<meta property="og:updated_time" content="2017-08-30T08:26:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js闭包">
 <meta name="twitter:description" content="js闭包，在我的理解来说主要就是在函数外部读取函数内部的变量。由于js的‘链式作用域’，函数内部的值无法被外部读取。可是如果在某些情况下如果想在函数外部的值读取函数内部的值怎么办呢？这是就要用到闭包了。
@@ -36,9 +34,8 @@ function a() {
     function b() {
         console.log(n)
     }
-    return ;
-}
-var">
+    return b();
+}">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -116,10 +113,9 @@ var">
     <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>{
         <span class="built_in">console</span>.log(n)
     }
-    <span class="keyword">return</span> ;
+    <span class="keyword">return</span> b();
 }
-<span class="keyword">var</span> c = a();
-c();
+a();
 </code></pre><p>可以在console中看到打印出的666</p>
 <p>这个是什么原理呢？</p>
 <p>在函数a中又声明了一个函数b，那么照js的‘链式作用域’的规则就可以得出函数b可以读到函数a的内部的值。这是，在函数a中把函数b作为返回值返回出来，就可以在函数a的外部读取函数b，而函数b又可以读取到函数a中的值，因此，用这种方法就可以在函数a外部读取到函数b的值了。</p>
@@ -130,7 +126,7 @@ c();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/03/24/js闭包/" data-id="cj6yqk00w00176ofydq0nwq2n" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/03/24/js闭包/" data-id="cj6yrgk7t0017cnfygar2tylj" class="article-share-link">Share</a>
       
       
     </footer>
