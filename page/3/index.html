@@ -65,6 +65,124 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/24/git基本操作/" class="article-date">
+  <time datetime="2016-03-24T04:20:18.000Z" itemprop="datePublished">2016-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/24/git基本操作/">git基本操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接触git也有一段时间了，现在总结下git的使用知识点。如想详细学习git，请百度———— ［廖雪峰 git］ 第一个就是。</p>
+<h3 id="git知识点：">git知识点：</h3><h4 id="1-_如何上传一个项目">1. 如何上传一个项目</h4><h4 id="(再此之前我默认你已经配置好ssh密匙等)">(再此之前我默认你已经配置好ssh密匙等)</h4><ol>
+<li>首先在git中新建一个仓库（名字不可以为中文）；</li>
+<li>在本地建立与之对应的一个仓库用于存储这个仓库的代码；</li>
+<li>cd到本仓库的目录下；</li>
+<li>git init （此步操作完成后，会生成一个隐藏的.git后缀文件） </li>
+<li>git add . (.是指添加整个工程，如需添加单个文件则只需要 git add test.js)</li>
+<li>git commit －m”注释内容”</li>
+<li>git remote add origin git@github.com:zjzno1/Demo.git (zjzno1是你的git名字，Demo是你新建的仓库的名字)</li>
+<li>git push -u origin master (将项目推向git)</li>
+</ol>
+<h4 id="2-_删除git一个项目（仓库）慎用！！！！！">2. 删除git一个项目（仓库）<font style="color: red">慎用！！！！！<font></font></font></h4><ol>
+<li>在主页点击进入想要删除的仓库</li>
+<li>在仓库的上方点击settings</li>
+<li>将页面拖到最下面，点击Delete this repository</li>
+<li>在弹出框输入本仓库的名字，确认删除。</li>
+</ol>
+<h4 id="3-_git上clone一个项目到本地">3. git上clone一个项目到本地</h4><ol>
+<li>git clone [ssh]</li>
+</ol>
+<h4 id="4-_更新远程代码到本地">4. 更新远程代码到本地</h4><ol>
+<li>git remote -v 查看远程仓库<br>git fetch origin master 从远程的origin仓库的master分支下载代码到本地的origin master<br>git log -p master.. origin/master 比较本地的仓库和远程参考的区别</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2016/03/24/git基本操作/" data-id="cj6ycx4rj002cizfygkrsf0qj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css实现水平垂直居中" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/22/css实现水平垂直居中/" class="article-date">
+  <time datetime="2016-03-22T02:58:28.000Z" itemprop="datePublished">2016-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/22/css实现水平垂直居中/">css实现水平垂直居中</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="废话不多说，直接上代码">废话不多说，直接上代码</h5><h5 id="父级元素position属性设置为_relative">父级元素position属性设置为 relative</h5><pre><code><span class="tag">body</span> <span class="rules">{
+    <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100%</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100%</span></span></span>;
+}</span>
+<span class="tag">div-one</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100px</span></span></span>;
+}</span>
+</code></pre><h5 id="子元素css">子元素css</h5><pre><code><span class="tag">div-one-content</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100px</span></span></span>;
+    <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#cbcb04</span></span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;
+    <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">50px</span></span></span>;
+    <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">50px</span></span></span>;
+}</span>
+</code></pre><h5 id="这样子元素就在父元素中居中">这样子元素就在父元素中居中</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2016/03/22/css实现水平垂直居中/" data-id="cj6ycx4rt002lizfya0m3to8p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-js事件捕获与事件冒泡" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/22/js事件捕获与事件冒泡/" class="article-date">
@@ -92,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/22/js事件捕获与事件冒泡/" data-id="cj6yrgk8h001tcnfys5iy5wg5" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/22/js事件捕获与事件冒泡/" data-id="cj6ycx4qz001nizfyycaae94h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件冒泡/">事件冒泡</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件捕获/">事件捕获</a></li></ul>
@@ -170,7 +288,7 @@ $(<span class="string">'#data-list'</span>).on(<span class="string">'click'</spa
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/22/js事件绑定与事件委托/" data-id="cj6yrgk8d001ncnfy3qcuczhu" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/22/js事件绑定与事件委托/" data-id="cj6ycx4qv001hizfyi9birft2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件委托/">事件委托</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件绑定/">事件绑定</a></li></ul>
@@ -519,7 +637,7 @@ $(<span class="string">""</span>).stringifyArray(array)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/19/前端面试题js相关总结/" data-id="cj6yrgk6r000icnfy5iqar0sj" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/19/前端面试题js相关总结/" data-id="cj6ycx4pm000gizfyj06d9uqe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a></li></ul>
@@ -696,7 +814,7 @@ $(<span class="string">""</span>).stringifyArray(array)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/19/前端面试题css相关总结/" data-id="cj6yrgk72000qcnfy07ivpojy" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/19/前端面试题css相关总结/" data-id="cj6ycx4py000oizfy249txovx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a></li></ul>
@@ -758,7 +876,7 @@ f();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/18/js变量声明提前/" data-id="cj6yrgk85001hcnfyofzkhjsa" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/18/js变量声明提前/" data-id="cj6ycx4qp001eizfygxiheaf1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -859,7 +977,7 @@ FALLBACK:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/" data-id="cj6yrgk6y000ncnfy61teadcx" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/17/前端面试题html相关总结/" data-id="cj6ycx4pt000lizfyq6e1frh2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a></li></ul>
@@ -897,7 +1015,7 @@ FALLBACK:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/14/跨域及解决办法/" data-id="cj6yrgk560003cnfyjp5epvqa" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/14/跨域及解决办法/" data-id="cj6ycx4p10001izfysfhjn8cq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
@@ -945,116 +1063,10 @@ FALLBACK:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/13/css盒模型/" data-id="cj6yrgk94002pcnfys1tmqi63" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/03/13/css盒模型/" data-id="cj6ycx4rr002jizfyryga0lb1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-chrome开发者模式教程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/12/chrome开发者模式教程/" class="article-date">
-  <time datetime="2016-03-12T12:25:00.000Z" itemprop="datePublished">2016-03-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/12/chrome开发者模式教程/">chrome开发者模式教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="这是我之前写的一篇chrome开发者模式使用的教程，后面也有我对前端的一些认识与经历，希望能对看到的人有些帮助">这是我之前写的一篇chrome开发者模式使用的教程，后面也有我对前端的一些认识与经历，希望能对看到的人有些帮助</h4><p><a href="http://yun.baidu.com/s/1bnr3bfL" target="_blank" rel="external">轻松玩转chrome开发者模式</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/12/chrome开发者模式教程/" data-id="cj6yrgk9j0031cnfyvqdost8i" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编写html应当遵循的原则" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/12/编写html应当遵循的原则/" class="article-date">
-  <time datetime="2016-03-12T11:36:14.000Z" itemprop="datePublished">2016-03-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/12/编写html应当遵循的原则/">编写html应当遵循的原则</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="以下是bootsharp给出的h5标准，很有参考意义，可以推荐下">以下是bootsharp给出的h5标准，很有参考意义，可以推荐下</h4><ol>
-<li>用两个空格符代替tab</li>
-<li>嵌套元素应当进行缩进（即两空格）</li>
-<li>对于属性的定义，用双引号</li>
-<li>不要自闭合</li>
-<li>不可省略结束标签</li>
-<li>为每个HTML页面第一行添加标准模式&lt;!DOCTYPE html&gt;</li>
-<li>语言属性<html lang="zh-cn"></html></li>
-<li>IE兼容模式<meta http-equiv="X-UA-Compatible" content="IE=Edge"></li>
-<li>字符编码<meta charset="utf-8"></li>
-<li>引入css和js文件<link rel="stylesheet" href="code-guide.css"><pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"code-guide.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</code></pre></li>
-<li>尽量减少标签并保持最小的时间复杂度</li>
-<li>属性顺序  <pre><code><span class="class"><span class="keyword">class</span>
-</span>id , nmae
-data-*
-src , <span class="keyword">for</span> , <span class="class"><span class="keyword">type</span> , <span class="title">href</span>
-</span>title , alt
-aria-* , role
-</code></pre></li>
-<li>布尔boolean属性不用赋值</li>
-<li>避免JavaScript生成的标签</li>
-</ol>
-<h5 id="h5标准实例">h5标准实例</h5><p><img src="http://ww1.sinaimg.cn/large/a5152f55gw1ew1s25ouiej20dv076jt8.jpg" alt=""> </p>
-<h5 id="另外我的一些感悟">另外我的一些感悟</h5><ul>
-<li>编写html时应当符合语义化，即对html的编写符合人类和浏览器的阅读习惯</li>
-<li>编写html时一定要注意文档流，注意清除浮动，不要破坏文档流</li>
-<li>尽量减少标签的使用</li>
-</ul>
-<h5 id="以上">以上</h5>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/03/12/编写html应当遵循的原则/" data-id="cj6yrgk690006cnfyhqemamtx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文章/">文章</a></li></ul>
 
     </footer>
   </div>
@@ -1085,7 +1097,7 @@ aria-* , role
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -1094,7 +1106,7 @@ aria-* , role
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -1103,7 +1115,7 @@ aria-* , role
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1119,19 +1131,19 @@ aria-* , role
           </li>
         
           <li>
+            <a href="/2017/08/31/prototype与-proto/">prototype与_proto_</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/31/执行函数表达式-IIFE/">js立即执行函数表达式(IIFE)</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/30/css实现border的0-5px/">css实现border的0.5px</a>
           </li>
         
           <li>
             <a href="/2017/08/29/js深拷贝与浅拷贝/">js深拷贝与浅拷贝</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/29/js函数柯里化/">js函数柯里化</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/24/js闭包/">js闭包</a>
           </li>
         
       </ul>

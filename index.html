@@ -95,10 +95,103 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2116/03/19/第一篇博客/" data-id="cj6yrgk6f000bcnfycfyj41vb" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2116/03/19/第一篇博客/" data-id="cj6ycx4pe0009izfy9zct4t05" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前言/">前言</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-prototype与-proto" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/31/prototype与-proto/" class="article-date">
+  <time datetime="2017-08-31T06:35:20.000Z" itemprop="datePublished">2017-08-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/31/prototype与-proto/">prototype与_proto_</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2017/08/31/prototype与-proto/" data-id="cj702tbty000boufyj46arjym" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/prototype/">prototype</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-执行函数表达式-IIFE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/31/执行函数表达式-IIFE/" class="article-date">
+  <time datetime="2017-08-31T02:34:10.000Z" itemprop="datePublished">2017-08-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/31/执行函数表达式-IIFE/">js立即执行函数表达式(IIFE)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时需要在定义函数之后，立即调用该函数。这种函数就叫做立即执行函数，全称为立即调用的函数表达式IIFE(Imdiately Invoked Function Expression)。</p>
+<p>　[注意]javascript引擎规定，如果function关键字出现在行首，一律解释成函数声明语句。</p>
+<pre><code><span class="comment">//声明语句（必须有函数名）</span>
+<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span>{}
+</code></pre><p>所以，解决方法就是不要让function出现在行首，让引擎将其理解成一个表达式</p>
+<p>最常用的两种写法：</p>
+<pre><code><span class="list">(<span class="keyword">function</span><span class="list">()</span><span class="collection">{ /* code */ }</span><span class="list">()</span>)</span><span class="comment">; </span>
+<span class="list">(<span class="keyword">function</span><span class="list">()</span><span class="collection">{ /* code */ }</span>)</span><span class="list">()</span><span class="comment">; </span>
+</code></pre><p>其他写法：</p>
+<pre><code>!<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* code */</span> }();
+~<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* code */</span> }();
+-<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* code */</span> }();
++<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* code */</span> }();
+
+<span class="keyword">var</span> i = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="keyword">return</span> <span class="number">10</span>; }();
+<span class="literal">true</span> &amp;&amp; <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* code */</span> }();
+<span class="number">0</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* code */</span> }();
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2017/08/31/执行函数表达式-IIFE/" data-id="cj6zu775j0007oufyg76ra7vs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
 
     </footer>
   </div>
@@ -188,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/08/30/css实现border的0-5px/" data-id="cj6yrgk9b002vcnfyboah7g0v" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/08/30/css实现border的0-5px/" data-id="cj6yozyz90005oufyhx6zz10o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -226,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/08/29/js深拷贝与浅拷贝/" data-id="cj6yrgk7w0018cnfyhzi42qfv" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/08/29/js深拷贝与浅拷贝/" data-id="cj6ycx4qg0015izfyohd8mtiy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,14 +351,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>柯里化通常也称部分求值，其含义是给函数分步传递参数，每次传递参数后部分应用参数，并返回一个更具体的函数接受剩下的参数，这中间可嵌套多层这样的接受部分参数函数，直至返回最后结果。</p>
+<p>柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求。这增加了函数的适用性，但同时也降低了函数的适用范围。</p>
+<p>那么柯里话的好处呢？有以下三个方面：<br>柯里化有3个常见作用：1. 参数复用；2. 提前返回；3. 延迟计算/运行</p>
+<p>通俗的说，就是一个函数接收一个参数，然后在return另一个函数接收另一个参数，如果参数长度任意，则map/reduce或者其他手段循环出来。</p>
+<p>例如，一个确定只有两个参数的柯里化</p>
+<pre><code><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(y)</span> </span>{
+    <span class="keyword">return</span> x + y;
+  };
+};
+
+<span class="keyword">var</span> increment = add(<span class="number">1</span>);
+<span class="keyword">var</span> addTen = add(<span class="number">10</span>);
+
+increment(<span class="number">2</span>);
+<span class="comment">// 3</span>
+
+addTen(<span class="number">2</span>);
+<span class="comment">// 12</span>
+</code></pre><p>这是add()中的形参x表示接收到的第一个参数，也就是<code>var increment = add(1)</code> 中的1和 <code>var addTen = add(10)</code> 中的10，<code>increment(2)</code>与<code>addTen(2)</code>中的2分别由y接收到。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/08/29/js函数柯里化/" data-id="cj6yrgk89001jcnfyuqor76oi" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/08/29/js函数柯里化/" data-id="cj6ycx4qt001gizfylejinw36" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/柯里化/">柯里化</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型-原型链/">原型/原型链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/柯里化/">柯里化</a></li></ul>
 
     </footer>
   </div>
@@ -304,7 +417,8 @@
     }
     <span class="keyword">return</span> b();
 }
-a();
+<span class="keyword">var</span> c = a();
+c();
 </code></pre><p>可以在console中看到打印出的666</p>
 <p>这个是什么原理呢？</p>
 <p>在函数a中又声明了一个函数b，那么照js的‘链式作用域’的规则就可以得出函数b可以读到函数a的内部的值。这是，在函数a中把函数b作为返回值返回出来，就可以在函数a的外部读取函数b，而函数b又可以读取到函数a中的值，因此，用这种方法就可以在函数a外部读取到函数b的值了。</p>
@@ -315,7 +429,7 @@ a();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/03/24/js闭包/" data-id="cj6yrgk7t0017cnfygar2tylj" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/03/24/js闭包/" data-id="cj6yd4ty70032izfy4vjr7ol2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -403,7 +517,7 @@ a();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/03/05/css之制作三角形/" data-id="cj6yrgk9e002xcnfy78wai299" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/03/05/css之制作三角形/" data-id="cj6ycx4rz002pizfy9upkmh2r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三角形/">三角形</a></li></ul>
@@ -458,7 +572,7 @@ a();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/" data-id="cj6yrgk470000cnfyxy66v33x" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/" data-id="cj6ycx4oc0000izfy0khu2f1b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/规范/">规范</a></li></ul>
@@ -519,101 +633,10 @@ a();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/10/20/ionic在ios端的打包与上传到app-store/" data-id="cj6yrgk8s0025cnfyp1pvz8nw" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/10/20/ionic在ios端的打包与上传到app-store/" data-id="cj6ycx4r8001zizfyjc1znod5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app-store/">app store</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关于nodejs的调试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/05/关于nodejs的调试/" class="article-date">
-  <time datetime="2016-09-05T02:44:49.000Z" itemprop="datePublished">2016-09-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/关于nodejs的调试/">关于nodejs的调试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近使用了nodejs写程序，但是之前调试都是在程序源码中打印console.log来查看变量或者代替断点，这样在每次修改完之后要重启服务，并且相对来说比较繁琐耗时，因此上网探索了一下nodejs的调试相关内容，把学到的东西整理一下。</p>
-<p>因为项目是用express搭的，因此直接说怎么调试express（其实调试单个文件也同理）。</p>
-<p>在搭建好node开发环境的前提下，首先要在全局安装node-inspector，</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> node-inspector</span>
-</code></pre><p>然后再安装supervisor（这是一个修改代码保存后自动刷新的插件，免去了每次修改代码后都要重新启动服务的烦恼，如果想了解详情，请自行百度（谷歌）supervisor^_^）</p>
-<pre><code>sudo install supervisor
-<span class="comment">//mac上加sudo，否则有时会出错（因为权限问题）</span>
-</code></pre><p>接下来就要正是进行nodejs的调试了</p>
-<pre><code>supervisor --<span class="keyword">debug</span> ./bin/www
-<span class="comment">//在终端中的项目目录下输入这句话回车，监听程序启动，express也跑起来了</span>
-</code></pre><p>打开<a href="http://localhost:3000，就可以看到启动的express了。" target="_blank" rel="external">http://localhost:3000，就可以看到启动的express了。</a></p>
-<p>再打开一个新的终端，cd到文件目录下，执行</p>
-<pre><code>node-inspector &amp;
-</code></pre><p>这时出现一个地址，复制地址到chrome中打开，就可以看到类似chrome开发者工具的东西了，在这里，可以进行设置断点，查看变量等操作，完美调试nodejs程序。</p>
-<p>over (^_^)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/09/05/关于nodejs的调试/" data-id="cj6yrgk77000ucnfyfigij3ph" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-gulp使用指南" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/25/gulp使用指南/" class="article-date">
-  <time datetime="2016-08-25T07:00:52.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/gulp使用指南/">gulp使用指南</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/25/gulp使用指南/" data-id="cj6yrgk8x002fcnfy3w3d3704" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
 
     </footer>
   </div>
@@ -644,7 +667,7 @@ a();
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -653,7 +676,7 @@ a();
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -662,7 +685,7 @@ a();
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -678,19 +701,19 @@ a();
           </li>
         
           <li>
+            <a href="/2017/08/31/prototype与-proto/">prototype与_proto_</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/31/执行函数表达式-IIFE/">js立即执行函数表达式(IIFE)</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/30/css实现border的0-5px/">css实现border的0.5px</a>
           </li>
         
           <li>
             <a href="/2017/08/29/js深拷贝与浅拷贝/">js深拷贝与浅拷贝</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/29/js函数柯里化/">js函数柯里化</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/24/js闭包/">js闭包</a>
           </li>
         
       </ul>
