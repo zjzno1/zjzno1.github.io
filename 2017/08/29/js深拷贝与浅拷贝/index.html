@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>js深拷贝与浅拷贝 | 极昼博客</title>
+  <title>js的引用、深拷贝与浅拷贝 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端、web、js、html">
+  <meta name="description" content="这篇文章主要总结下什么是js的引用、深拷贝与浅拷贝。
+要先理解什么是深拷贝和浅拷贝，就要先回顾一下js的基础知识。
+js的基本数据类型与引用类型（栈与堆）什么是栈与堆栈（stack）是自动分配的内存空间，由系统自动释放；堆（heap）则是动态分配内存，大小不定也不会自动释放。
+基本数据类型与引用类型js的基本数据类型：number、string、boolean、null与undefined，他们存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js深拷贝与浅拷贝">
+<meta property="og:title" content="js的引用、深拷贝与浅拷贝">
 <meta property="og:url" content="http://zjzno1.github.io/2017/08/29/js深拷贝与浅拷贝/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="前端、web、js、html">
-<meta property="og:updated_time" content="2017-08-29T08:34:37.000Z">
+<meta property="og:description" content="这篇文章主要总结下什么是js的引用、深拷贝与浅拷贝。
+要先理解什么是深拷贝和浅拷贝，就要先回顾一下js的基础知识。
+js的基本数据类型与引用类型（栈与堆）什么是栈与堆栈（stack）是自动分配的内存空间，由系统自动释放；堆（heap）则是动态分配内存，大小不定也不会自动释放。
+基本数据类型与引用类型js的基本数据类型：number、string、boolean、null与undefined，他们存">
+<meta property="og:updated_time" content="2017-09-04T03:59:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js深拷贝与浅拷贝">
-<meta name="twitter:description" content="前端、web、js、html">
+<meta name="twitter:title" content="js的引用、深拷贝与浅拷贝">
+<meta name="twitter:description" content="这篇文章主要总结下什么是js的引用、深拷贝与浅拷贝。
+要先理解什么是深拷贝和浅拷贝，就要先回顾一下js的基础知识。
+js的基本数据类型与引用类型（栈与堆）什么是栈与堆栈（stack）是自动分配的内存空间，由系统自动释放；堆（heap）则是动态分配内存，大小不定也不会自动释放。
+基本数据类型与引用类型js的基本数据类型：number、string、boolean、null与undefined，他们存">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -78,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      js深拷贝与浅拷贝
+      js的引用、深拷贝与浅拷贝
     </h1>
   
 
@@ -86,13 +95,127 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>这篇文章主要总结下什么是js的引用、深拷贝与浅拷贝。</p>
+<p>要先理解什么是深拷贝和浅拷贝，就要先回顾一下js的基础知识。</p>
+<h3 id="js的基本数据类型与引用类型（栈与堆）">js的基本数据类型与引用类型（栈与堆）</h3><h4 id="什么是栈与堆">什么是栈与堆</h4><p>栈（stack）是自动分配的内存空间，由系统自动释放；堆（heap）则是动态分配内存，大小不定也不会自动释放。</p>
+<h4 id="基本数据类型与引用类型">基本数据类型与引用类型</h4><p>js的基本数据类型：<code>number、string、boolean、null与undefined</code>，他们存放在栈中，JS基本数据类型的变量存放的是基本类型数据的实际值，而不是指针。<br>这里顺便讲下，存放在栈中的值(即js的基本数据类型)是不可改变的</p>
+<pre><code><span class="tag">var</span> <span class="tag">a</span> = <span class="string">'123'</span>
+<span class="tag">a</span>[<span class="number">0</span>] = <span class="number">2</span>
+console.<span class="function"><span class="title">log</span><span class="params">(a)</span></span> <span class="comment">// '123'</span>
+</code></pre><p>引用类型：对象（object）、数组（array）、函数（function），他们存放在堆中，引用数据类型的变量保存对它的引用，即指针。<br>举个例子</p>
+<pre><code><span class="tag">var</span> <span class="tag">a</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]
+<span class="tag">var</span> <span class="tag">b</span> = <span class="tag">a</span>
+console.<span class="function"><span class="title">log</span><span class="params">(b)</span></span> <span class="comment">// [1,2,3]</span>
+<span class="tag">b</span>[<span class="number">0</span>] = <span class="number">2</span>
+console.<span class="function"><span class="title">log</span><span class="params">(a)</span></span> <span class="comment">// [2,2,3]</span>
+console.<span class="function"><span class="title">log</span><span class="params">(b)</span></span> <span class="comment">// [2,2,3]</span>
+</code></pre><p>可以看出，把数组a赋值给b，改变数组b的值，则a中的值也跟随改变。由此可以看出把a赋值给b，只是把a指向的指针赋值给了b，而并没有把值赋值给b。这就是js的引用。</p>
+<h5 id="对于上面这种情况，如果我们想要一组和a一样的新数组，并且修改b并不影响a,那该怎么办呢？">对于上面这种情况，如果我们想要一组和a一样的新数组，并且修改b并不影响a,那该怎么办呢？</h5><h5 id="这时就可以用浅拷贝">这时就可以用浅拷贝</h5><pre><code>var a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]
+var b = []
+<span class="keyword">for</span>(var i=<span class="number">0</span>;i&lt;a.length;i++)
+{
+    b.push(a[i])
+}
+console.<span class="built_in">log</span>(b) <span class="comment">// [1,2,3]</span>
+b[<span class="number">0</span>] = <span class="number">2</span>
+console.<span class="built_in">log</span>(a) <span class="comment">// [1,2,3]</span>
+console.<span class="built_in">log</span>(b) <span class="comment">// [2,2,3]</span>
+
+<span class="comment">//特别说明，由于引用类型比较是传地址，而这是a和b不在同一个地址中，所以 a!==b</span>
+a === b <span class="comment">//false</span>
+</code></pre><p>完美，我们得到了一个不改变原始变量的新数组！到这里，那深拷贝又有什么用呢？不急，往下看~</p>
+<h5 id="js的深拷贝">js的深拷贝</h5><p>有一些时候引用类型不想上面那个简单==，比如</p>
+<pre><code><span class="keyword">var</span> obj = {
+    name: <span class="string">'zjz'</span>,
+    age: <span class="number">24</span>,
+    likeNumber: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]
+}
+</code></pre><p>如果用浅拷贝是这么写：</p>
+<pre><code><span class="keyword">var</span> newObj = {}
+<span class="keyword">for</span>(<span class="keyword">var</span> <span class="keyword">prop</span> <span class="keyword">in</span> obj){
+    <span class="keyword">if</span>(obj.hasOwnProperty(<span class="keyword">prop</span>)){
+        newObj[<span class="keyword">prop</span>] = obj[<span class="keyword">prop</span>]
+    }
+}
+</code></pre><p>这时我们得到一个新的对象newObj,</p>
+<pre><code>console.<span class="function"><span class="title">log</span><span class="params">(newObj)</span></span> 
+<span class="comment">/* {
+    name: 'zjz',
+    age: 24,
+    likeNumber: [1,2,3]
+}
+*/</span>
+</code></pre><p>这时改变newObj中的值</p>
+<pre><code>newObj<span class="class">.name</span> = <span class="string">'zjz1'</span>
+newObj<span class="class">.likeNumber</span>[<span class="number">0</span>] = <span class="string">'5'</span>
+
+console.<span class="function"><span class="title">log</span><span class="params">(obj)</span></span>
+<span class="comment">/* {
+    name: 'zjz',
+    age: 24,
+    likeNumber: [1,2,3]
+}
+*/</span>
+console.<span class="function"><span class="title">log</span><span class="params">(newObj)</span></span>
+<span class="comment">/* {
+    name: 'zjz1',
+    age: 24,
+    likeNumber: [5,2,3]
+}
+*/</span>
+</code></pre><p>可以看出，改变newObj的值，name属性在obj中确实没变，但是likeNumber却变了，这是怎么回事呢？</p>
+<p>这是因为浅拷贝值赋值了一层对象的属性，并不包括对象里的引用类型数据，所以就会出现上面的改变newObj中的likeNumber而obj中的likeNumber跟随变得事情。</p>
+<p>这种情况要怎么办呢？是时候让深拷贝登场啦\^o^/ </p>
+<p>什么是深拷贝？</p>
+<p>深拷贝就是对对象以及对象的所有子对象进行拷贝，实现方法：</p>
+<pre><code>    <span class="keyword">var</span> obj = {
+    name: <span class="string">'zjz'</span>,
+    age: <span class="number">24</span>,
+    likeNumber: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]
+}
+<span class="keyword">var</span> obj1 = {}
+<span class="comment">//进行深拷贝操作的函数</span>
+<span class="function"><span class="keyword">function</span> <span class="title">inCopy</span>(<span class="params">obj1,obj2</span>) </span>{
+    <span class="keyword">var</span> obj1 = obj1 || {};<span class="comment">//容错处理</span>
+    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj2) { 
+        <span class="keyword">if</span>(obj2.hasOwnProperty(k)){ <span class="comment">//只拷贝实例属性，不进行原型的拷贝</span>
+            <span class="keyword">if</span>(<span class="keyword">typeof</span> obj2[k] == <span class="string">'object'</span>) { <span class="comment">//引用类型的数据单独处理</span>
+                obj1[k] = <span class="built_in">Array</span>.isArray(obj2[k])?[]:{};
+                inCopy(obj1[k],obj2[k]); <span class="comment">//递归处理引用类型数据</span>
+            }<span class="keyword">else</span>{
+                obj1[k] = obj2[k]; <span class="comment">//值类型的数据直接进行拷贝</span>
+            }
+        }
+    }
+}
+
+inCopy(obj1,obj)
+obj1.likeNumber[<span class="number">0</span>] = <span class="number">5</span>
+<span class="built_in">console</span>.log(obj)
+<span class="comment">/*
+{
+    name: 'zjz',
+    age: 24,
+    likeNumber: [1,2,3]
+}
+*/</span>
+<span class="built_in">console</span>.log(obj1)
+    <span class="comment">/*
+{
+    name: 'zjz',
+    age: 24,
+    likeNumber: [5,2,3]
+}
+*/</span>
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2017/08/29/js深拷贝与浅拷贝/" data-id="cj6ycx4qg0015izfyohd8mtiy" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2017/08/29/js深拷贝与浅拷贝/" data-id="cj75n0zr0001gg2fycx8ymvd6" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a></li></ul>
+
     </footer>
   </div>
   
@@ -136,7 +259,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -145,7 +268,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -182,7 +305,7 @@
           </li>
         
           <li>
-            <a href="/2017/08/29/js深拷贝与浅拷贝/">js深拷贝与浅拷贝</a>
+            <a href="/2017/08/29/js深拷贝与浅拷贝/">js的引用、深拷贝与浅拷贝</a>
           </li>
         
       </ul>
