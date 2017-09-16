@@ -65,6 +65,122 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-AMD与CMD规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/13/AMD与CMD规范/" class="article-date">
+  <time datetime="2016-12-13T01:45:41.000Z" itemprop="datePublished">2016-12-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/13/AMD与CMD规范/">AMD与CMD规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。<br>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。</p>
+<p>AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置</p>
+<p>第一个参数 id 为字符串类型，表示了模块标识，为可选参数。若不存在则模块标识应该默认定义为在加载器中被请求脚本的标识。如果存在，那么模块标识必须为顶层的或者一个绝对的标识。<br>第二个参数，dependencies ，是一个当前模块依赖的，已被模块定义的模块标识的数组字面量。<br>第三个参数，factory，是一个需要进行实例化的函数或者一个对象。</p>
+<pre><code>define(<span class="string">"module"</span>, [<span class="string">"dep1"</span>, <span class="string">"dep2"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">d1, d2</span>) </span>{
+  <span class="keyword">return</span> someExportedValue;
+});
+<span class="built_in">require</span>([<span class="string">"module"</span>, <span class="string">"../file"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">module, file</span>) </span>{ <span class="comment">/* ... */</span> });
+</code></pre><p>优点：<br>适合在浏览器环境异步加载<br>并行加载多个模块<br>缺点：<br>提高开发成本，代码阅读和书写比较困难<br>不符合通用的模块思维方式，是一种妥协的实现</p>
+<p>在CMD中，一个模块就是一个文件，格式为：<br>    define( factory );<br>    全局函数define，用来定义模块。<br>    参数 factory  可以是一个函数，也可以为对象或者字符串。<br>    当 factory 为对象、字符串时，表示模块的接口就是该对象、字符串。</p>
+<pre><code><span class="class"><span class="keyword">define</span></span>(function(<span class="keyword">require</span>, exports, module) {
+  <span class="built_in">var</span> $ = <span class="keyword">require</span>(<span class="string">'jquery'</span>);
+  <span class="built_in">var</span> Spinning = <span class="keyword">require</span>(<span class="string">'./spinning'</span>);
+  exports<span class="built_in">.</span>doSomething = <span class="attribute">...</span>
+  module<span class="built_in">.</span>exports = <span class="attribute">...</span>
+})
+</code></pre><p>优点：</p>
+<p>依赖就近，延迟执行<br>很容易在node中运行<br>缺点：<br>依赖SPM打包，模块的加载逻辑偏重<br>实现： SeaJS</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/" data-id="cj7mm82b300009vfy5k3oo9m4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/规范/">规范</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ionic在ios端的打包与上传到app-store" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/20/ionic在ios端的打包与上传到app-store/" class="article-date">
+  <time datetime="2016-10-20T05:42:22.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/ionic在ios端的打包与上传到app-store/">ionic在ios端的打包与上传到app store</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>搞了一段时间的ionic在ios端的打包上传，终于弄好了，期间有遇到很多坑，先记录下来，以供以后用到的人学习参考。</p>
+<p>ionic打包成ipa并上传到app store，第一反应是怎么打包，和打包原生app有什么不同。其实没什么不同，完全可以看作是一个原生app的打包发布，网上打包原生app的教程也同样适用于ionic的打包发布。</p>
+<p>可以参考一下内容打包发布</p>
+<p><a href="http://blog.csdn.net/haozhoupan/article/details/51181709" target="_blank" rel="external"> Xcode打包项目(.xcodeproj=&gt;.ipa)</a><br><a href="http://www.jianshu.com/p/ae482e6cb973" target="_blank" rel="external">iOS开发之2016年App提交上架App Store最新流程(iPhone)</a></p>
+<p>下面说说这两篇文章没有提到我却遇到的坑。。TT</p>
+<p>1.按照上面的步骤，得到的证书确是 ‘不受信任／由未知机构颁发的’ ,在打包的时候会报错，Missing iOS Distribution signing identity …<br>网上说是删除过期证书，但是我删完了也没用，还是报错，看到了下面这片文章</p>
+<p><a href="http://blog.csdn.net/qq_26338299/article/details/50670630" target="_blank" rel="external">Missing iOS Distribution signing identity问题解决</a></p>
+<p>因该是AppleWWDRCA证书无效（但我这没过期。。所以具体原因不太清楚），下载一个新的，双击安装就好了。</p>
+<p><a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer" target="_blank" rel="external">下载地址</a></p>
+<ol>
+<li><p>打包时候在General下的Bundle Identifier的名字要与申请的保持一致</p>
+</li>
+<li><p>在上传的时候，要General下的Deployment Info 下的Devices，如果只要选择iPhone，则选择iPhone，想全选选择Universal。</p>
+</li>
+<li><p>上传说明图时，上传一下规格</p>
+</li>
+</ol>
+<p>4.7寸,5.5寸，ipad五种图片，对应尺寸大小：<br>3.5寸：横坚屏 640<em>960 或960</em>640<br>4寸：横坚屏 640<em>1036 或1036</em>640<br>4.7寸：横坚屏 750<em>1334 或1334</em>750<br>5.5寸：横坚屏 1242<em>2208 或2208</em>1242<br>ipad：横坚屏 1024<em>768 或768</em>1024</p>
+<p>（5.5寸测试成功）</p>
+<ol>
+<li>icon图标上传大小为1024*1024的正方形</li>
+</ol>
+<p>额，目前遇到想到就这么多，望对读者有帮助。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2016/10/20/ionic在ios端的打包与上传到app-store/" data-id="cj7mm82ex002h9vfyqyrpcgq6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app-store/">app store</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-关于nodejs的调试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/05/关于nodejs的调试/" class="article-date">
@@ -106,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/09/05/关于nodejs的调试/" data-id="cj75n0zqj000yg2fy8rltqvic" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/09/05/关于nodejs的调试/" data-id="cj7mm82du000w9vfy7tul85sy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
@@ -144,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/25/gulp使用指南/" data-id="cj75n0zrz002sg2fy1eckjfqw" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/08/25/gulp使用指南/" data-id="cj7mm82f4002r9vfy9m8hywvb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
@@ -182,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/25/express中next-的理解/" data-id="cj75n0zs3002yg2fyswc44tzo" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/08/25/express中next-的理解/" data-id="cj7mm82f9002x9vfymw3auhvf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express/">express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -223,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/22/js正则表达式学习笔记/" data-id="cj75n0zr4001kg2fyoiwpzx80" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/08/22/js正则表达式学习笔记/" data-id="cj7mm82ef001i9vfyj8027se9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -300,7 +416,7 @@ add.<span class="keyword">bind</span>(<span class="sub"><span class="keyword">su
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/11/js中的call和apply/" data-id="cj75n0zrn002cg2fyilocmche" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/08/11/js中的call和apply/" data-id="cj7mm82ev002b9vfy9cu330s5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apply/">apply</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/call/">call</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -358,7 +474,7 @@ a(b);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/11/js回调函数/" data-id="cj75n0zr8001og2fy9fj0mzk0" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/08/11/js回调函数/" data-id="cj7mm82ej001n9vfywueql3by" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回调函数/">回调函数</a></li></ul>
@@ -396,7 +512,7 @@ a(b);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/26/一些优秀的文章-1/" data-id="cj75n0zqq0013g2fyu5tctmiw" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/07/26/一些优秀的文章-1/" data-id="cj7mm82dz00119vfy7x0d66u1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/收藏/">收藏</a></li></ul>
@@ -453,117 +569,10 @@ node -v <span class="comment">//查看当前node版本号</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/26/node中n的使用——版本控制/" data-id="cj75n0zqw001ag2fy5iyfq9gf" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/07/26/node中n的使用——版本控制/" data-id="cj7mm82e600189vfy5gphphw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MVC、MVP与MVVM模型理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/15/MVC、MVP与MVVM模型理解/" class="article-date">
-  <time datetime="2016-07-15T08:24:11.000Z" itemprop="datePublished">2016-07-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/15/MVC、MVP与MVVM模型理解/">MVC、MVP与MVVM模型理解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 早就听说过MVC,MCP,MVVM模型，但一直只知其一，不知其二。这几天终于找机会实力查了一波资料，好好的了解了一下，下面就聊一聊这三种模型，如有不对，欢迎大家指正。</p>
-<p> 首先来说一下MVC框架，就是经典的Model，view，controller，最早提出于上世纪80年代。一般来说，Model提供数据，view是向用户展示的界面，而controller，以及用Model中的数据是Model和View之间联系的桥梁。一个简单的例子就是一般建设一个网站，数据库扮演的就是Model的角色，而后台扮演的就是controller的角色，前端扮演的是View角色。但是在前端中，MVC又该如何理解呢？</p>
-<p> 下面来举一个例子：</p>
-<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>本实例来源于维基百科 <span class="keyword">*</span>/    
-/<span class="keyword">*</span><span class="keyword">*</span> 模型 Model, View, Controller <span class="keyword">*</span>/
-var M = {}, V = {}, C = {};
-
-/<span class="keyword">*</span><span class="keyword">*</span> Model 负责存放资料 <span class="keyword">*</span>/
-M.data = <span class="string">"hello world"</span>;
-
-/<span class="keyword">*</span><span class="keyword">*</span> View 负责将资料打印到屏幕上 <span class="keyword">*</span>/
-V.render = function (M) { alert(M.data); }
-
-/<span class="keyword">*</span><span class="keyword">*</span> Controller 作为一个M和V的桥梁 <span class="keyword">*</span>/
-C.handleOnload = function () { V.render(M); }
-
-/<span class="keyword">*</span><span class="keyword">*</span> 在网页读取的时候呼叫 Controller <span class="keyword">*</span>/
-window.onload = C.handleOnload;
-</code></pre><p> 这就是一个前端的MVC实例</p>
-<p> 那么MVP呢？即 Model View Presenter</p>
-<ol>
-<li>Model 定义使用者界面所需要被显示的资料模型，一个模型包含着相关的业务逻辑。</li>
-<li>View 视图为呈现使用者界面的终端，用以表现来自 Model 的资料，和使用者命令路由再经过 Presenter 对事件处理后的资料。</li>
-<li><p>Presenter 包含着元件的事件处理，负责检索 Model 取得资料，和将取得的资料经过格式转换与 View 进行沟通。</p>
-<p>那MVC与MVP之前又有什么不同呢？</p>
-</li>
-</ol>
-<p>在经典MVC中，一对controller-view捆绑起来表示一个ui组件，controller直接接受用户输入，并将输入转为相应命令来调用model的接口，对model的状态进行修改，最后通过观察者模式对view进行重新渲染。而MVP是修改controller-view的捆绑关系，为了解决controller-view的捆绑关系，将进行改造，使view不仅拥有UI组件的结构，还拥有处理用户事件的能力，这样就能将controller独立出来。为了对用户事件进行统一管理，view只负责将用户产生的事件传递给controller，由controller来统一处理，这样的好处是多个view可共用同一个controller。总结而言，即提升了controller的作用，把他从ui组件中提取出来，进而成为一个可以通用的逻辑处理程序。</p>
-<p>MVVM —— Model-View-ViewModel</p>
-<p>这个让我们来看一下下图：<br><img src="https://raw.githubusercontent.com/zjzno1/img/master/mvvm.jpeg" alt=""></p>
-<p>view和model是不知道彼此存在的，同MVP一样，将view和model清晰地分离开来。 其次，view是对viewmodel的外在显示，与viewmodel保持同步，viewmodel对象可以看作是view的上下文。view绑定到viewmodel的属性上，如果viewmodel中的属性值变化了，这些新值通过数据绑定会自动传递给view。反过来viewmodel会暴露model中的数据和特定状态给view。 所以，view不知道model的存在，viewmodel和model也觉察不到view。事实上，model也完全忽略viewmodel和view的存在。这是一个非常松散耦合的设计。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/15/MVC、MVP与MVVM模型理解/" data-id="cj75n0zsn003hg2fy7bzagkui" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/">MVP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVVM/">MVVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模型/">模型</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexo常用命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/13/hexo常用命令/" class="article-date">
-  <time datetime="2016-07-13T08:52:25.000Z" itemprop="datePublished">2016-07-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/13/hexo常用命令/">hexo常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="由于很长时间没有写博客，因此竟忘了一些hexo的基本操作【==|_尴尬。。】，在此复习一下，顺便做下笔记。">由于很长时间没有写博客，因此竟忘了一些hexo的基本操作【==| 尴尬。。】，在此复习一下，顺便做下笔记。</h5><h5 id="hexo_new_“blog_title”_//在终端中cd到hexo所在的文件夹下，输入这条命令，自动生成blog的titie、date、tages等模板；">hexo new “blog title”   //在终端中cd到hexo所在的文件夹下，输入这条命令，自动生成blog的titie、date、tages等模板；</h5><h5 id="hexo_s_//这条命令是在本地开启服务，在指定的url下可以在本地预览blog最终展现的模样；">hexo s //这条命令是在本地开启服务，在指定的url下可以在本地预览blog最终展现的模样；</h5><h5 id="hexo_g_//根据md生成静态页面存到public目录下">hexo g //根据md生成静态页面存到public目录下</h5><h5 id="hexo_d_//将-deploy目录部署到GitHub">hexo d //将.deploy目录部署到GitHub</h5><h5 id="当hexo_s后到0-0-0-0:4000_显示未发送任何数据时，请检测是否开启了vpn，如果开启了请关闭。">当hexo s后到0.0.0.0:4000 显示未发送任何数据时，请检测是否开启了vpn，如果开启了请关闭。</h5>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/13/hexo常用命令/" data-id="cj75n0zrw002pg2fyerdki284" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-博客/">hexo 博客</a></li></ul>
 
     </footer>
   </div>
@@ -594,7 +603,7 @@ window.onload = C.handleOnload;
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -603,7 +612,7 @@ window.onload = C.handleOnload;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 13.33px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -612,7 +621,7 @@ window.onload = C.handleOnload;
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -628,19 +637,19 @@ window.onload = C.handleOnload;
           </li>
         
           <li>
+            <a href="/2017/09/08/css-实现多张图片居中显示/">css 实现多张图片居中显示</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/04/js实现如何不点击跳转另一页面/">js实现如何不点击跳转另一页面</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/31/prototype与-proto/">prototype与_proto_</a>
           </li>
         
           <li>
             <a href="/2017/08/31/执行函数表达式-IIFE/">js立即执行函数表达式(IIFE)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/30/css实现border的0-5px/">css实现border的0.5px</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/29/js深拷贝与浅拷贝/">js的引用、深拷贝与浅拷贝</a>
           </li>
         
       </ul>
