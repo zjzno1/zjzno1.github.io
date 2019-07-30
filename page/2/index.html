@@ -65,10 +65,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-AMD与CMD规范" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-浏览器和node中的Eventloop" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/13/AMD与CMD规范/" class="article-date">
-  <time datetime="2016-12-13T01:45:41.000Z" itemprop="datePublished">2016-12-13</time>
+    <a href="/2019/07/13/浏览器和node中的Eventloop/" class="article-date">
+  <time datetime="2019-07-13T06:50:39.000Z" itemprop="datePublished">2019-07-13</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/13/AMD与CMD规范/">AMD与CMD规范</a>
+      <a class="article-title" href="/2019/07/13/浏览器和node中的Eventloop/">浏览器和node中的Eventloop</a>
     </h1>
   
 
@@ -87,32 +87,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。<br>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。</p>
-<p>AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置</p>
-<p>第一个参数 id 为字符串类型，表示了模块标识，为可选参数。若不存在则模块标识应该默认定义为在加载器中被请求脚本的标识。如果存在，那么模块标识必须为顶层的或者一个绝对的标识。<br>第二个参数，dependencies ，是一个当前模块依赖的，已被模块定义的模块标识的数组字面量。<br>第三个参数，factory，是一个需要进行实例化的函数或者一个对象。</p>
-<pre><code>define(<span class="string">"module"</span>, [<span class="string">"dep1"</span>, <span class="string">"dep2"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">d1, d2</span>) </span>{
-  <span class="keyword">return</span> someExportedValue;
-});
-<span class="built_in">require</span>([<span class="string">"module"</span>, <span class="string">"../file"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">module, file</span>) </span>{ <span class="comment">/* ... */</span> });
-</code></pre><p>优点：<br>适合在浏览器环境异步加载<br>并行加载多个模块<br>缺点：<br>提高开发成本，代码阅读和书写比较困难<br>不符合通用的模块思维方式，是一种妥协的实现</p>
-<p>在CMD中，一个模块就是一个文件，格式为：<br>    define( factory );<br>    全局函数define，用来定义模块。<br>    参数 factory  可以是一个函数，也可以为对象或者字符串。<br>    当 factory 为对象、字符串时，表示模块的接口就是该对象、字符串。</p>
-<pre><code><span class="class"><span class="keyword">define</span></span>(function(<span class="keyword">require</span>, exports, module) {
-  <span class="built_in">var</span> $ = <span class="keyword">require</span>(<span class="string">'jquery'</span>);
-  <span class="built_in">var</span> Spinning = <span class="keyword">require</span>(<span class="string">'./spinning'</span>);
-  exports<span class="built_in">.</span>doSomething = <span class="attribute">...</span>
-  module<span class="built_in">.</span>exports = <span class="attribute">...</span>
+        <h4 id="浏览器中的Eventloop">浏览器中的Eventloop</h4><p>JS 在执行的过程中会产生执行环境，这些执行环境会被顺序的加入到执行栈中。如果遇到异步的代码，会被挂起并加入到 Task（有多种 task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。</p>
+<p>setTimeout的第二个参数不得小于 4 毫秒，不足会自动增加</p>
+<p>同的任务源会被分配到不同的 Task 队列中，任务源可以分为 微任务（microtask） 和 宏任务（macrotask）。在 ES6 规范中，microtask 称为 jobs，macrotask 称为 task。</p>
+<p>微任务包括 <code>process.nextTick ，promise ，Object.observe ，MutationObserver</code><br>宏任务包括 <code>script ， setTimeout ，setInterval ，setImmediate ，I/O ，UI rendering</code></p>
+<p>很多人有个误区，认为微任务快于宏任务，其实是错误的。因为宏任务中包括了 script ，浏览器会先执行一个宏任务，接下来有异步代码的话就先执行微任务。</p>
+<p>所以正确的一次 Event loop 顺序是这样的</p>
+<p>执行同步代码，这属于宏任务<br>执行栈为空，查询是否有微任务需要执行<br>执行所有微任务<br>必要的话渲染 UI<br>然后开始下一轮 Event loop，执行宏任务中的异步代码</p>
+<h4 id="node中的Eventloop">node中的Eventloop</h4><p>Node 中的 Event loop 和浏览器中的不相同。</p>
+<p>Node 的 Event loop 分为6个阶段，它们会按照顺序反复运行</p>
+<p>┌───────────────────────┐<br>┌─&gt;│        timers         │<br>│  └──────────┬────────────┘<br>│  ┌──────────┴────────────┐<br>│  │     I/O callbacks     │<br>│  └──────────┬────────────┘<br>│  ┌──────────┴────────────┐<br>│  │     idle, prepare     │<br>│  └──────────┬────────────┘      ┌───────────────┐<br>│  ┌──────────┴────────────┐      │   incoming:   │<br>│  │         poll          │&lt;──connections───     │<br>│  └──────────┬────────────┘      │   data, etc.  │<br>│  ┌──────────┴────────────┐      └───────────────┘<br>│  │        check          │<br>│  └──────────┬────────────┘<br>│  ┌──────────┴────────────┐<br>└──┤    close callbacks    │<br>   └───────────────────────┘</p>
+<p>timer<br>timers 阶段会执行 setTimeout 和 setInterval<br>一个 timer 指定的时间并不是准确时间，而是在达到这个时间后尽快执行回调，可能会因为系统正在执行别的事务而延迟。<br>下限的时间有一个范围：[1, 2147483647] ，如果设定的时间不在这个范围，将被设置为1。<br><strong>I/O </strong><br>I/O 阶段会执行除了 close 事件，定时器和 setImmediate 的回调<br>idle, prepare<br>idle, prepare 阶段内部实现<br>poll<br>poll 阶段很重要，这一阶段中，系统会做两件事情</p>
+<p>执行到点的定时器<br>执行 poll 队列中的事件</p>
+<p>并且当 poll 中没有定时器的情况下，会发现以下两件事情</p>
+<p>如果 poll 队列不为空，会遍历回调队列并同步执行，直到队列为空或者系统限制<br>如果 poll 队列为空，会有两件事发生</p>
+<p>如果有 setImmediate 需要执行，poll 阶段会停止并且进入到 check 阶段执行 setImmediate<br>如果没有 setImmediate 需要执行，会等待回调被加入到队列中并立即执行回调</p>
+<p>如果有别的定时器需要被执行，会回到 timer 阶段执行回调。<br>check<br>check 阶段执行 setImmediate<br>close callbacks<br>close callbacks 阶段执行 close 事件<br>并且在 Node 中，有些情况下的定时器执行顺序是随机的<br>setTimeout(() =&gt; {<br>    console.log(‘setTimeout’);<br>}, 0);<br>setImmediate(() =&gt; {<br>    console.log(‘setImmediate’);<br>})<br>// 这里可能会输出 setTimeout，setImmediate<br>// 可能也会相反的输出，这取决于性能<br>// 因为可能进入 event loop 用了不到 1 毫秒，这时候会执行 setImmediate<br>// 否则会执行 setTimeout<br>复制代码当然在这种情况下，执行顺序是相同的<br>var fs = require(‘fs’)</p>
+<p>fs.readFile(__filename, () =&gt; {<br>    setTimeout(() =&gt; {<br>        console.log(‘timeout’);<br>    }, 0);<br>    setImmediate(() =&gt; {<br>        console.log(‘immediate’);<br>    });<br>});<br>// 因为 readFile 的回调在 poll 中执行<br>// 发现有 setImmediate ，所以会立即跳到 check 阶段执行回调<br>// 再去 timer 阶段执行 setTimeout<br>// 所以以上输出一定是 setImmediate，setTimeout<br>复制代码上面介绍的都是 macrotask 的执行情况，microtask 会在以上每个阶段完成后立即执行。<br>setTimeout(()=&gt;{<br>    console.log(‘timer1’)</p>
+<pre><code><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>)
 })
-</code></pre><p>优点：</p>
-<p>依赖就近，延迟执行<br>很容易在node中运行<br>缺点：<br>依赖SPM打包，模块的加载逻辑偏重<br>实现： SeaJS</p>
+</code></pre><p>}, 0)</p>
+<p>setTimeout(()=&gt;{<br>    console.log(‘timer2’)</p>
+<pre><code><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>)
+})
+</code></pre><p>}, 0)</p>
+<p>// 以上代码在浏览器和 node 中打印情况是不同的<br>// 浏览器中一定打印 timer1, promise1, timer2, promise2<br>// node 中可能打印 timer1, timer2, promise1, promise2<br>// 也可能打印 timer1, promise1, timer2, promise2<br>复制代码Node 中的 process.nextTick 会先于其他 microtask 执行。<br>setTimeout(() =&gt; {<br>  console.log(“timer1”);</p>
+<p>  Promise.resolve().then(function() {<br>    console.log(“promise1”);<br>  });<br>}, 0);</p>
+<p>process.nextTick(() =&gt; {<br>  console.log(“nextTick”);<br>});<br>// nextTick, timer1, promise1</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/" data-id="cjpdfz41q0000eyp0zfmhadsk" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/13/浏览器和node中的Eventloop/" data-id="cjypybrv6000rwefy5otu8s4n" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/规范/">规范</a></li></ul>
-
     </footer>
   </div>
   
@@ -120,10 +130,10 @@
 
 
   
-    <article id="post-ionic在ios端的打包与上传到app-store" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-网络安全与反劫持" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/20/ionic在ios端的打包与上传到app-store/" class="article-date">
-  <time datetime="2016-10-20T05:42:22.000Z" itemprop="datePublished">2016-10-20</time>
+    <a href="/2019/07/12/网络安全与反劫持/" class="article-date">
+  <time datetime="2019-07-12T06:38:45.000Z" itemprop="datePublished">2019-07-12</time>
 </a>
     
   </div>
@@ -134,7 +144,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/20/ionic在ios端的打包与上传到app-store/">ionic在ios端的打包与上传到app store</a>
+      <a class="article-title" href="/2019/07/12/网络安全与反劫持/">网络安全与反劫持</a>
     </h1>
   
 
@@ -142,37 +152,108 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>搞了一段时间的ionic在ios端的打包上传，终于弄好了，期间有遇到很多坑，先记录下来，以供以后用到的人学习参考。</p>
-<p>ionic打包成ipa并上传到app store，第一反应是怎么打包，和打包原生app有什么不同。其实没什么不同，完全可以看作是一个原生app的打包发布，网上打包原生app的教程也同样适用于ionic的打包发布。</p>
-<p>可以参考一下内容打包发布</p>
-<p><a href="http://blog.csdn.net/haozhoupan/article/details/51181709" target="_blank" rel="external"> Xcode打包项目(.xcodeproj=&gt;.ipa)</a><br><a href="http://www.jianshu.com/p/ae482e6cb973" target="_blank" rel="external">iOS开发之2016年App提交上架App Store最新流程(iPhone)</a></p>
-<p>下面说说这两篇文章没有提到我却遇到的坑。。TT</p>
-<p>1.按照上面的步骤，得到的证书确是 ‘不受信任／由未知机构颁发的’ ,在打包的时候会报错，Missing iOS Distribution signing identity …<br>网上说是删除过期证书，但是我删完了也没用，还是报错，看到了下面这片文章</p>
-<p><a href="http://blog.csdn.net/qq_26338299/article/details/50670630" target="_blank" rel="external">Missing iOS Distribution signing identity问题解决</a></p>
-<p>因该是AppleWWDRCA证书无效（但我这没过期。。所以具体原因不太清楚），下载一个新的，双击安装就好了。</p>
-<p><a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer" target="_blank" rel="external">下载地址</a></p>
+        <p>httpDNS 使用http协议代替基于UDP的DNS协议</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2019/07/12/网络安全与反劫持/" data-id="cjypybru90008wefyarnhkne0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端性能优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/12/前端性能优化/" class="article-date">
+  <time datetime="2019-07-12T06:17:29.000Z" itemprop="datePublished">2019-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/12/前端性能优化/">前端新能优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="有没有做过性能优化，怎么性能优化（具体措施有哪些），怎么确定要从什么方面优化">有没有做过性能优化，怎么性能优化（具体措施有哪些），怎么确定要从什么方面优化</h3><h4 id="传输数据时间优化">传输数据时间优化</h4><h4 id="页面加载时间优化">页面加载时间优化</h4><h4 id="怎么确定首屏加载时间">怎么确定首屏加载时间</h4><ol>
+<li>设置缓存，浏览器缓存，http缓存，cdn缓存，nginx缓存等</li>
+<li>压缩代码（css，js，html）</li>
+<li>使用gzip（nginx设置）</li>
+<li>dns预解析 <code>&lt;link rel=&#39;dns-prefetch&#39; href=&#39;#&#39;&gt;</code>（不能滥用，对多页面使用dns预解析，会增加dns查询数）</li>
+<li>优化代码（合理的拆分代码），减少dom操作（合理布局，减少重绘和回流）与优化js逻辑, (例如使用vnode，代码解耦)</li>
+</ol>
+<p>1）使用 translate 替代 top<br>2）使用 visibility 替换 display: none ，因为前者只会引起重绘，后者会引发回流（改变了布局）<br>3）把 DOM 离线后修改，比如：先把 DOM 给 display:none (有一次 Reflow)，然后你修改100次，然后再把它显示出来<br>4）不要把 DOM 结点的属性值放在一个循环里当成循环里的变量</p>
+<pre><code><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) {
+<span class="comment">// 获取 offsetTop 会导致回流，因为需要去获取正确的值</span>
+<span class="built_in">console</span>.log(<span class="built_in">document</span>.querySelector(<span class="string">'.test'</span>).style.offsetTop)
+</code></pre><p>}<br>5）不要使用 table 布局，可能很小的一个小改动会造成整个 table 的重新布局<br>6）动画实现的速度的选择，动画速度越快，回流次数越多，也可以选择使用 requestAnimationFrame<br>7）CSS 选择符从右往左匹配查找，避免 DOM 深度过深<br>8）将频繁运行的动画变为图层，图层能够阻止该节点回流影响别的元素。比如对于 video 标签，浏览器会自动将该节点变为图层。</p>
 <ol>
-<li><p>打包时候在General下的Bundle Identifier的名字要与申请的保持一致</p>
+<li>合理分配http请求 </li>
+<li>多域名并行请求资源，增加cdn</li>
+<li>使用异步js，css等</li>
+<li>使用首屏加载，懒加载和预加载</li>
+<li>合理缓存数据和不常变动的资源，使用浏览器的localStoage与sessionStorage，或者indexDB等</li>
+<li>js事件的节流与防抖</li>
+<li><p>使用 service worker，缓存文件，提高首屏速度</p>
+<p>// index.js<br>if (navigator.serviceWorker) {<br>navigator.serviceWorker</p>
+<pre><code>.register(<span class="string">"sw.js"</span>)
+.then(<span class="function"><span class="keyword">function</span>(<span class="params">registration</span>) </span>{
+<span class="built_in">console</span>.log(<span class="string">"service worker 注册成功"</span>);
+})
+.catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>{
+<span class="built_in">console</span>.log(<span class="string">"servcie worker 注册失败"</span>);
+});
+</code></pre><p>}<br>// sw.js<br>// 监听 <code>install</code> 事件，回调中缓存所需文件<br>self.addEventListener(“install”, e =&gt; {<br>e.waitUntil(</p>
+<pre><code>caches.open(<span class="string">"my-cache"</span>).<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(cache)</span></span> {
+<span class="keyword">return</span> cache.addAll([<span class="string">"./index.html"</span>, <span class="string">"./index.js"</span>]);
+})
+</code></pre><p>);<br>});</p>
+<p>// 拦截所有请求事件<br>// 如果缓存中已经有请求的数据就直接用缓存，否则去请求数据<br>self.addEventListener(“fetch”, e =&gt; {<br>e.respondWith(</p>
+<pre><code>caches.match(e.<span class="built_in">request</span>).<span class="keyword">then</span>(<span class="keyword">function</span>(<span class="built_in">response</span>) {
+<span class="keyword">if</span> (<span class="built_in">response</span>) {
+    return <span class="built_in">response</span>;
+}
+console.<span class="built_in">log</span>(<span class="string">"fetch source"</span>);
+})
+</code></pre><p>);<br>});</p>
 </li>
-<li><p>在上传的时候，要General下的Deployment Info 下的Devices，如果只要选择iPhone，则选择iPhone，想全选选择Universal。</p>
-</li>
-<li><p>上传说明图时，上传一下规格</p>
+<li><p>优化图片等资源，例如使用webp，雪碧图等</p>
 </li>
 </ol>
-<p>4.7寸,5.5寸，ipad五种图片，对应尺寸大小：<br>3.5寸：横坚屏 640<em>960 或960</em>640<br>4寸：横坚屏 640<em>1036 或1036</em>640<br>4.7寸：横坚屏 750<em>1334 或1334</em>750<br>5.5寸：横坚屏 1242<em>2208 或2208</em>1242<br>ipad：横坚屏 1024<em>768 或768</em>1024</p>
-<p>（5.5寸测试成功）</p>
-<ol>
-<li>icon图标上传大小为1024*1024的正方形</li>
+<p>1）CSS或者svg 去代替可以替代的图片<br>2）小图使用 base64 格式<br>3）选择正确的图片格式：<br>    使用雪碧图</p>
+<pre><code>对于能够显示 WebP 格式的浏览器尽量使用 WebP 格式。因为 WebP 格式具有更好的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图像质量，缺点就是兼容性并不好
+
+小图使用 PNG，其实对于大部分图标这类图片，完全可以使用 SVG 代替
+
+照片使用 JPEG
+</code></pre><ol>
+<li><p>执行 JS 代码过长会卡住渲染，对于需要很多时间计算的代码可以考虑使用 Webworker。Webworker 可以让我们另开一个线程执行脚本而不影响渲染或者可以考虑切片，把每分js异步切片，尽量使之运行时间小于16ms</p>
+</li>
+<li><p>chorme开发者工具，cmd + shift + p，搜索coverage，可以看到哪些代码没有用到</p>
+</li>
 </ol>
-<p>额，目前遇到想到就这么多，望对读者有帮助。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/10/20/ionic在ios端的打包与上传到app-store/" data-id="cjpdfz43o002jeyp048sov347" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/12/前端性能优化/" data-id="cjypybrvj001awefyfedts55y" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app-store/">app store</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化相关/">性能优化相关</a></li></ul>
 
     </footer>
   </div>
@@ -181,10 +262,10 @@
 
 
   
-    <article id="post-关于nodejs的调试" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-1-2-3-map-parseInt-what-why" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/09/05/关于nodejs的调试/" class="article-date">
-  <time datetime="2016-09-05T02:44:49.000Z" itemprop="datePublished">2016-09-05</time>
+    <a href="/2019/07/12/1-2-3-map-parseInt-what-why/" class="article-date">
+  <time datetime="2019-07-11T16:04:21.000Z" itemprop="datePublished">2019-07-12</time>
 </a>
     
   </div>
@@ -195,7 +276,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/05/关于nodejs的调试/">关于nodejs的调试</a>
+      <a class="article-title" href="/2019/07/12/1-2-3-map-parseInt-what-why/">[1, 2, 3].map(parseInt) what &amp; why ?</a>
     </h1>
   
 
@@ -203,30 +284,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近使用了nodejs写程序，但是之前调试都是在程序源码中打印console.log来查看变量或者代替断点，这样在每次修改完之后要重启服务，并且相对来说比较繁琐耗时，因此上网探索了一下nodejs的调试相关内容，把学到的东西整理一下。</p>
-<p>因为项目是用express搭的，因此直接说怎么调试express（其实调试单个文件也同理）。</p>
-<p>在搭建好node开发环境的前提下，首先要在全局安装node-inspector，</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> node-inspector</span>
-</code></pre><p>然后再安装supervisor（这是一个修改代码保存后自动刷新的插件，免去了每次修改代码后都要重新启动服务的烦恼，如果想了解详情，请自行百度（谷歌）supervisor^_^）</p>
-<pre><code>sudo install supervisor
-<span class="comment">//mac上加sudo，否则有时会出错（因为权限问题）</span>
-</code></pre><p>接下来就要正是进行nodejs的调试了</p>
-<pre><code>supervisor --<span class="keyword">debug</span> ./bin/www
-<span class="comment">//在终端中的项目目录下输入这句话回车，监听程序启动，express也跑起来了</span>
-</code></pre><p>打开<a href="http://localhost:3000，就可以看到启动的express了。" target="_blank" rel="external">http://localhost:3000，就可以看到启动的express了。</a></p>
-<p>再打开一个新的终端，cd到文件目录下，执行</p>
-<pre><code>node-inspector &amp;
-</code></pre><p>这时出现一个地址，复制地址到chrome中打开，就可以看到类似chrome开发者工具的东西了，在这里，可以进行设置断点，查看变量等操作，完美调试nodejs程序。</p>
-<p>over (^_^)</p>
+        <p>这是今天在 Advanced-Frontend组织 看到一个比较有意思的题目。<br>主要是讲JS的映射与解析<br>早在 2013年, 加里·伯恩哈德就在微博上发布了以下代码段:</p>
+<p>[‘10’,’10’,’10’,’10’,’10’].map(parseInt);<br>// [10, NaN, 2, 3, 4]<br>parseInt<br>parseInt() 函数解析一个字符串参数，并返回一个指定基数的整数 (数学系统的基础)。</p>
+<p>const intValue = parseInt(string[, radix]);<br>string 要被解析的值。如果参数不是一个字符串，则将其转换为字符串(使用 ToString 抽象操作)。字符串开头的空白符将会被忽略。</p>
+<p>radix 一个介于2和36之间的整数(数学系统的基础)，表示上述字符串的基数。默认为10。<br>返回值 返回一个整数或NaN</p>
+<p>parseInt(100); // 100<br>parseInt(100, 10); // 100<br>parseInt(100, 2); // 4 -&gt; converts 100 in base 2 to base 10<br>注意：<br>在radix为 undefined，或者radix为 0 或者没有指定的情况下，JavaScript 作如下处理：</p>
+<p>如果字符串 string 以”0x”或者”0X”开头, 则基数是16 (16进制).<br>如果字符串 string 以”0”开头, 基数是8（八进制）或者10（十进制），那么具体是哪个基数由实现环境决定。ECMAScript 5 规定使用10，但是并不是所有的浏览器都遵循这个规定。因此，永远都要明确给出radix参数的值。<br>如果字符串 string 以其它任何值开头，则基数是10 (十进制)。<br>更多详见parseInt | MDN</p>
+<p>map<br>map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。</p>
+<p>var new_array = arr.map(function callback(currentValue[,index[, array]]) {<br> // Return element for new_array<br> }[, thisArg])<br>可以看到callback回调函数需要三个参数, 我们通常只使用第一个参数 (其他两个参数是可选的)。<br>currentValue 是callback 数组中正在处理的当前元素。<br>index可选, 是callback 数组中正在处理的当前元素的索引。<br>array可选, 是callback map 方法被调用的数组。<br>另外还有thisArg可选, 执行 callback 函数时使用的this 值。</p>
+<p>const arr = [1, 2, 3];<br>arr.map((num) =&gt; num + 1); // [2, 3, 4]<br>更多详见Array.prototype.map() | MDN</p>
+<p>回到真实的事例上<br>回到我们真实的事例上</p>
+<p>[‘1’, ‘2’, ‘3’].map(parseInt)<br>对于每个迭代map, parseInt()传递两个参数: 字符串和基数。<br>所以实际执行的的代码是：</p>
+<p>[‘1’, ‘2’, ‘3’].map((item, index) =&gt; {<br>    return parseInt(item, index)<br>})<br>即返回的值分别为：</p>
+<p>parseInt(‘1’, 0) // 1<br>parseInt(‘2’, 1) // NaN<br>parseInt(‘3’, 2) // NaN, 3 不是二进制<br>所以：</p>
+<p>[‘1’, ‘2’, ‘3’].map(parseInt)<br>// 1, NaN, NaN<br>由此，加里·伯恩哈德例子也就很好解释了，这里不再赘述</p>
+<p>[‘10’,’10’,’10’,’10’,’10’].map(parseInt);<br>// [10, NaN, 2, 3, 4]<br>如何在现实世界中做到这一点<br>如果您实际上想要循环访问字符串数组, 该怎么办？    map()然后把它换成数字？使用编号!</p>
+<p>[‘10’,’10’,’10’,’10’,’10’].map(Number);<br>// [10, 10, 10, 10, 10]<br>本文始发于我的博客：[‘1’, ‘2’, ‘3’].map(parseInt) what &amp; why ?</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/09/05/关于nodejs的调试/" data-id="cjpdfz42u000yeyp098jv94x7" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/12/1-2-3-map-parseInt-what-why/" data-id="cjypybrt60000wefyzajlucu8" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
-
     </footer>
   </div>
   
@@ -234,10 +314,10 @@
 
 
   
-    <article id="post-gulp使用指南" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-防抖和节流的实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/25/gulp使用指南/" class="article-date">
-  <time datetime="2016-08-25T07:00:52.000Z" itemprop="datePublished">2016-08-25</time>
+    <a href="/2019/07/11/防抖和节流的实现/" class="article-date">
+  <time datetime="2019-07-11T15:12:33.000Z" itemprop="datePublished">2019-07-11</time>
 </a>
     
   </div>
@@ -248,7 +328,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/gulp使用指南/">gulp使用指南</a>
+      <a class="article-title" href="/2019/07/11/防抖和节流的实现/">防抖和节流的实现</a>
     </h1>
   
 
@@ -256,229 +336,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/25/gulp使用指南/" data-id="cjpdfz43t002teyp0tw3pmakz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-express中next-的理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/25/express中next-的理解/" class="article-date">
-  <time datetime="2016-08-25T01:21:35.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/express中next-的理解/">express中next()的理解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/25/express中next-的理解/" data-id="cjpdfz443002zeyp0f9y4p0uz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express/">express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js正则表达式学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/22/js正则表达式学习笔记/" class="article-date">
-  <time datetime="2016-08-22T02:40:42.000Z" itemprop="datePublished">2016-08-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/22/js正则表达式学习笔记/">js正则表达式学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="正则表达式中的特殊字符">正则表达式中的特殊字符</h4><p>\ 转义<br>^ 匹配一个或一行的开头<br>$ 匹配一个或一行的结尾<br>* 匹配前面元字符0次或多次<br>+ 匹配前面元字符1次或多次<br>? 匹配前面元字符0次或1次<br>x|y 匹配x或y<br>. 表示匹配字符串中出现的第一个非换行符字符<br>{n} 精确匹配元字符n次<br>{n,} 匹配元字符n次或以上<br>{n,m} 匹配n-m次<br>[xyz] 字符集，匹配这个字符集中的任意一个字符<br>[^xyz] 不匹配这个字符集中的任意一个字符<br>[\b] 匹配一个退格符<br>\b 匹配一个单词的边界<br>\B 匹配一个单词的非边界<br>\cX 这儿，X是一个控制符，/\cM/匹配Ctrl-M<br>\d 匹配一个字数字符，/\d/ = /[0-9]/<br>\D 匹配一个非字数字符，/\D/ = /[^0-9]/<br>\n 匹配一个换行符<br>\r 匹配一个回车符<br>\s 匹配一个空白字符，包括\n,\r,\f,\t,\v等<br>\S 匹配一个非空白字符，等于/[^\n\f\r\t\v]/<br>\t 匹配一个制表符<br>\v 匹配一个重直制表符<br>\w 匹配一个可以组成单词的字符，包括字母大小写、数字、下划线，如[\w]匹配”$5.98”中的5，等于[a-zA-Z0-9]<br>\W 匹配一个不可以组成单词的字符，如[\W]匹配”$5.98”中的$，等于[^a-zA-Z0-9]</p>
-<h5 id="注：(1)_javascript默认是贪婪匹配，也就是说匹配重复字符是尽可能多地匹配，而且允许后续的正则表达式继续匹配。而进行非贪婪匹配，只需要在待匹配的字符后面跟随一个问号即可：“??”、“+?”、“*?”、“{1,5}?”。比如：/a+/可以匹配一个或多个连续的字母a。当使用“aaa”作为匹配字符串时，/a+/会匹配它的三个字母。但是/a+?/会尽可能少的匹配，只能匹配第一个哦~">注：(1) javascript默认是贪婪匹配，也就是说匹配重复字符是尽可能多地匹配，而且允许后续的正则表达式继续匹配。而进行非贪婪匹配，只需要在待匹配的字符后面跟随一个问号即可：“??”、“+?”、“*?”、“{1,5}?”。比如：/a+/可以匹配一个或多个连续的字母a。当使用“aaa”作为匹配字符串时，/a+/会匹配它的三个字母。但是/a+?/会尽可能少的匹配，只能匹配第一个哦~</h5><p>(2)当要匹配连字符-时，在[]中请把它放在第一位，以防解释为范围。</p>
-<h4 id="正则表达式中/i,/g,/ig,/gi,/m的区别和含义">正则表达式中/i,/g,/ig,/gi,/m的区别和含义</h4><p>/i (忽略大小写)<br>/g (全文查找出现的所有匹配字符)<br>/m (多行查找)<br>/gi(全文查找、忽略大小写)<br>/ig(全文查找、忽略大小写)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/22/js正则表达式学习笔记/" data-id="cjpdfz435001keyp039tc2vd5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js中的call和apply" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/js中的call和apply/" class="article-date">
-  <time datetime="2016-08-11T08:40:45.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/js中的call和apply/">js中的call和apply</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>call 和 apply 都是为了改变某个函数运行时的 context 即上下文而存在的，换句话说，就是为了改变函数体内部 this 的指向。</p>
-<p><code>obj.call(thisObj, arg1, arg2, ...);</code><br><code>obj.apply(thisObj, [arg1, arg2, ...]);</code></p>
-<p>两者作用一致，都是把obj(即this)绑定到thisObj，这时候thisObj具备了obj的属性和方法。或者说thisObj『继承』了obj的属性和方法。</p>
-<p>唯一区别是apply接受的是数组参数，call接受的是连续参数。所以当参数固定时可以使用call，当参数不固定时使用apply。</p>
-<p>举个栗子：</p>
-<pre><code>function add(j, k){
-    <span class="keyword">return</span> j+k;
+        <p>1.防抖</p>
+<p>触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p>
+<p>思路：</p>
+<p>使用闭包，每次触发事件时都取消之前的延时调用方法</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn</span>) </span>{
+  <span class="keyword">let</span> timeout = <span class="literal">null</span>; <span class="comment">// 创建一个标记用来存放定时器的返回值</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    clearTimeout(timeout); <span class="comment">// 每当用户输入的时候把前一个 setTimeout clear 掉</span>
+    timeout = setTimeout(() =&gt; { <span class="comment">// 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话，就不会执行 fn 函数</span>
+      fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);
+    }, <span class="number">500</span>);
+  };
+}
+<span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>{
+  <span class="built_in">console</span>.log(<span class="string">'防抖成功'</span>);
 }
 
-function <span class="sub"><span class="keyword">sub</span>(j, k){</span>
-    <span class="keyword">return</span> j-k;
+<span class="keyword">var</span> inp = <span class="built_in">document</span>.getElementById(<span class="string">'inp'</span>);
+inp.addEventListener(<span class="string">'input'</span>, debounce(sayHi)); <span class="comment">// 防抖</span>
+</code></pre><p>2.节流</p>
+<p>思路：</p>
+<p>每次触发事件时都判断当前是否有等待执行的延时函数</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn</span>) </span>{
+  <span class="keyword">let</span> canRun = <span class="literal">true</span>; <span class="comment">// 通过闭包保存一个标记</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">if</span> (!canRun) <span class="keyword">return</span>; <span class="comment">// 在函数开头判断标记是否为true，不为true则return</span>
+    canRun = <span class="literal">false</span>; <span class="comment">// 立即设置为false</span>
+    setTimeout(() =&gt; { <span class="comment">// 将外部传入的函数的执行放在setTimeout中</span>
+      fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);
+      <span class="comment">// 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。当定时器没有执行的时候标记永远是false，在开头被return掉</span>
+      canRun = <span class="literal">true</span>;
+    }, <span class="number">500</span>);
+  };
 }
-
-add(<span class="number">5</span>,<span class="number">3</span>); <span class="regexp">//</span><span class="number">8</span>
-add.call(<span class="sub"><span class="keyword">sub</span>, 5, 3);</span> //<span class="number">8</span>
-add.apply(<span class="sub"><span class="keyword">sub</span>, [5, 3]);</span> //<span class="number">8</span>
-
-<span class="sub"><span class="keyword">sub</span>(5, 3);</span> //<span class="number">2</span>
-<span class="sub"><span class="keyword">sub</span>.call(add, 5, 3);</span> //<span class="number">2</span>
-<span class="sub"><span class="keyword">sub</span>.apply(add, [5, 3]);</span> //<span class="number">2</span>
-</code></pre><p>调用原生对象的方法</p>
-<pre><code>var a = {<span class="number">0</span>:<span class="number">1</span>, <span class="number">1</span>:<span class="string">"zjz"</span>, length: <span class="number">2</span>}; 
-a.slice(); <span class="comment">//TypeError: a.slice is not a function</span>
-Array.prototype.slice.call(a);<span class="comment">//[1, "zjz"]</span>
-</code></pre><p>实现继承</p>
-<pre><code><span class="keyword">var</span> Parent = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-    <span class="keyword">this</span>.name = <span class="string">"zjz"</span>;
-    <span class="keyword">this</span>.age = <span class="number">22</span>;
+<span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">e</span>) </span>{
+  <span class="built_in">console</span>.log(e.target.innerWidth, e.target.innerHeight);
 }
-<span class="keyword">var</span> child = {};
-<span class="built_in">console</span>.log(child);<span class="comment">//Object {} ,空对象</span>
-Parent.call(child);
-<span class="built_in">console</span>.log(child); <span class="comment">//Object {name: "zjz", age: 24}</span>
-</code></pre><h4 id="bind的使用">bind的使用</h4><p><code>obj.bind(thisObj, arg1, arg2, ...);</code></p>
-<p>把obj绑定到thisObj，这时候thisObj具备了obj的属性和方法。与call和apply不同的是，bind绑定后不会立即执行。</p>
-<p>同样是add()和sub()：</p>
-<pre><code>add.<span class="keyword">bind</span>(<span class="sub"><span class="keyword">sub</span>, 5, 3);</span> //不再返回<span class="number">8</span>
-add.<span class="keyword">bind</span>(<span class="sub"><span class="keyword">sub</span>, 5, 3)();</span> //<span class="number">8</span>
-</code></pre><p>如果bind的第一个参数是null或者undefined，等于将this绑定到全局对象。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/11/js中的call和apply/" data-id="cjpdfz43k002deyp0dl7v0nmo" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apply/">apply</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/call/">call</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js回调函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/js回调函数/" class="article-date">
-  <time datetime="2016-08-11T08:26:06.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/js回调函数/">js回调函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>什么是js的回调函数，简而言之，就是把一个函数当做参数传入另一个函数中。</p>
-<pre><code>funtion <span class="function">a</span>(<span class="tag">a</span>,callback) {
-    <span class="function">callback</span>()
-}
-funtion <span class="function">b</span>() {
-    <span class="function">alert</span>(<span class="tag">a</span>)
-}
-<span class="function">a</span>(<span class="tag">b</span>)
-</code></pre><p>其中，函数b就是函数a的回调函数。</p>
-<p>那么回调函数如何传参？</p>
-<pre><code>function a(callback){
-    <span class="keyword">var</span> <span class="keyword">m</span> = 1;
-    <span class="keyword">var</span> <span class="keyword">n</span> = 2;
-    alert(callback(<span class="keyword">m</span>,<span class="keyword">n</span>));
-}
-function b(<span class="keyword">m</span>,<span class="keyword">n</span>){
-    <span class="keyword">return</span> <span class="keyword">m</span>+<span class="keyword">n</span>;
-}
-a(b);
-<span class="comment">//alert得出3</span>
+<span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, throttle(sayHi));
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/08/11/js回调函数/" data-id="cjpdfz438001peyp06ppd2yil" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/11/防抖和节流的实现/" data-id="cjypybrtq0001wefyfbrd8qk1" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回调函数/">回调函数</a></li></ul>
-
     </footer>
   </div>
   
@@ -486,10 +388,10 @@ a(b);
 
 
   
-    <article id="post-一些优秀的文章-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-js的判断对象类型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/26/一些优秀的文章-1/" class="article-date">
-  <time datetime="2016-07-26T07:15:08.000Z" itemprop="datePublished">2016-07-26</time>
+    <a href="/2019/07/11/js的判断对象类型/" class="article-date">
+  <time datetime="2019-07-11T13:04:07.000Z" itemprop="datePublished">2019-07-11</time>
 </a>
     
   </div>
@@ -500,7 +402,7 @@ a(b);
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/26/一些优秀的文章-1/">一些优秀的文章以及资源</a>
+      <a class="article-title" href="/2019/07/11/js的判断对象类型/">js的判断对象类型</a>
     </h1>
   
 
@@ -508,15 +410,29 @@ a(b);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="文章：">文章：</h3><h5 id="工作五年，后面四年重复着第一年的活儿？"><a href="http://www.barretlee.com/blog/2016/07/21/donnot-repeat-yourself/" target="_blank" rel="external">工作五年，后面四年重复着第一年的活儿？</a></h5><h5 id="JavaScript：通过事件委托实现事件可配置"><a href="http://www.html-js.com/article/1824" target="_blank" rel="external">JavaScript：通过事件委托实现事件可配置</a></h5><h5 id="科学上网之Shadowsocks详细攻略，全套翻墙方案"><a href="http://dvel.cc/shadowsocks-proxifier-fuck-gfw/" target="_blank" rel="external">科学上网之Shadowsocks详细攻略，全套翻墙方案</a></h5><h5 id="工具武装的前端开发工程师"><a href="https://segmentfault.com/a/1190000005994196?utm_source=weekly&amp;utm_medium=email&amp;utm_campaign=email_weekly" target="_blank" rel="external">工具武装的前端开发工程师</a></h5><h5 id="倾力总结40条常见的移动端Web页面问题解决方案"><a href="http://www.cnblogs.com/mumu-web/articles/5706792.html" target="_blank" rel="external">倾力总结40条常见的移动端Web页面问题解决方案</a></h5><h5 id="ECMAScript_6入门"><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6入门</a></h5><h5 id="前端乱炖网站2015年最受欢迎的20篇原创技术文章"><a href="http://www.tuicool.com/articles/7faA7nf" target="_blank" rel="external">前端乱炖网站2015年最受欢迎的20篇原创技术文章</a></h5><h3 id="资源">资源</h3><h5 id="Parallels——在mac上运行windows，调试ie浏览器"><a href="http://www.parallels.com/cn/" target="_blank" rel="external">Parallels——在mac上运行windows，调试ie浏览器</a></h5><h5 id="前端资源教程"><a href="https://cnodejs.org/topic/56ef3edd532839c33a99d00e" target="_blank" rel="external">前端资源教程</a></h5>
+        <p>可以通过 Object.prototype.toString.call(xx)。这样我们就可以获得类似 [object Type] 的字符串。<br>instanceof 可以正确的判断对象的类型，因为内部机制是通过判断对象的原型链中是不是能找到类型的 prototype。</p>
+<p>实现instanceof</p>
+<pre><code>function instanceof(<span class="keyword">left</span>, <span class="keyword">right</span>) {
+<span class="comment">// 获得类型的原型</span>
+<span class="keyword">let</span> prototype = <span class="keyword">right</span>.prototype
+<span class="comment">// 获得对象的原型</span>
+<span class="keyword">left</span> = <span class="keyword">left</span>.__proto__
+<span class="comment">// 判断对象的类型是否等于类型的原型</span>
+<span class="keyword">while</span> (<span class="literal">true</span>) {
+    <span class="keyword">if</span> (<span class="keyword">left</span> === null)
+        <span class="keyword">return</span> <span class="literal">false</span>
+    <span class="keyword">if</span> (prototype === <span class="keyword">left</span>)
+        <span class="keyword">return</span> <span class="literal">true</span>
+    <span class="keyword">left</span> = <span class="keyword">left</span>.__proto__
+}
+</code></pre><p>}</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/26/一些优秀的文章-1/" data-id="cjpdfz42w0013eyp03h7vv8ef" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/11/js的判断对象类型/" data-id="cjypybrw40024wefy29swcxsu" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/收藏/">收藏</a></li></ul>
-
     </footer>
   </div>
   
@@ -524,10 +440,10 @@ a(b);
 
 
   
-    <article id="post-node中n的使用——版本控制" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-js深拷贝的实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/26/node中n的使用——版本控制/" class="article-date">
-  <time datetime="2016-07-26T06:30:41.000Z" itemprop="datePublished">2016-07-26</time>
+    <a href="/2019/07/11/js深拷贝的实现/" class="article-date">
+  <time datetime="2019-07-10T16:06:19.000Z" itemprop="datePublished">2019-07-11</time>
 </a>
     
   </div>
@@ -538,7 +454,7 @@ a(b);
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/26/node中n的使用——版本控制/">node中n的使用——版本控制</a>
+      <a class="article-title" href="/2019/07/11/js深拷贝的实现/">js深拷贝的实现</a>
     </h1>
   
 
@@ -546,34 +462,142 @@ a(b);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在node开发中，有时候会遇到这样一些情况：</p>
-<p>一些工程要求低版本的node，而一些工程要求高版本的node，因此出来这样一个需求，那就是node的版本控制，要求在想要的时候可以切换到相应的node版本，且各个版本之间互不干扰。</p>
-<p>基于这一需求，网上给出两种答案，一是用nvm进行node的版本控制管理，二是用n进行node的版本控制管理，在权衡完nvm与n的利弊之后，笔者选择了n作为node的版本控制工具。原因如下：</p>
-<p>相比nvm，n更轻量，且n的操作更简单。但n也有弊端，那就是n是依赖于npm下的包，在想装n之前，要先装一个node环境。</p>
-<p>安装n</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> <span class="keyword">n</span></span>
-</code></pre><p>安装指定的node版本</p>
-<pre><code>n <span class="operator"><span class="keyword">install</span> &lt;<span class="keyword">version</span>&gt;</span>
-</code></pre><p>选择指定的node版本</p>
-<pre><code><span class="keyword">n</span> <span class="comment">//这时出现了安装过的node的版本号，按上下键选择相应的版本，回车</span>
-node -v <span class="comment">//查看当前node版本号</span>
-</code></pre><p>删除指定的node版本</p>
-<pre><code><span class="keyword">n</span> <span class="keyword">rm</span> &lt;<span class="keyword">version</span>&gt;
-</code></pre><p>在n安装过程中遇到的一些问题：</p>
-<p>安装n后选择node版本号失效。呃。。。对于这个问题。。笔者的解决方法是删除所有node环境重新安装，然后成功。初步估计是路径问题。</p>
-<p>碰到 dyld:bad external relocation length Trace/BPT trap: 5</p>
-<p>这个问题也困扰了我比较长的时间，最后看到overstackflow上有个兄弟给出了一个解决的方案，在终端中输入</p>
-<pre><code><span class="title">n</span> latest 
-</code></pre><p>将版本更新到最新，然后node -v就是最新的版本，然后把出问题的版本删除，成功解决。</p>
-
+        <p>第一种方法，使用<code>JSON.stringify</code>和<code>JSON.parse</code>实现</p>
+<pre><code><span class="keyword">let</span> deepClone = function (obj) {
+<span class="keyword">let</span> _tmp = <span class="type">JSON</span>.stringify(obj);//将对象转换为json字符串形式
+<span class="keyword">let</span> <span class="literal">result</span> = <span class="type">JSON</span>.parse(_tmp);//将转换而来的字符串转换为原生js对象
+<span class="keyword">return</span> <span class="literal">result</span>;
+</code></pre><p>};</p>
+<p>第二种方法，使用递归遍历对象实现</p>
+<pre><code>function deepClone(obj) {
+    <span class="keyword">let</span> <span class="literal">result</span> = typeof  obj.splice === <span class="string">"function"</span> ? [] : {};
+    <span class="keyword">if</span> (obj &amp;&amp; typeof obj === '<span class="keyword">object</span>') {
+        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) {
+            <span class="keyword">if</span> (obj[key] &amp;&amp; typeof obj[key] === '<span class="keyword">object</span>') {
+                <span class="literal">result</span>[key] = deepClone(obj[key]);//如果对象的属性值为<span class="keyword">object</span>的时候，递归调用deepClone,即在吧某个值对象复制一份到新的对象的对应值中。
+            } <span class="keyword">else</span> {
+                <span class="literal">result</span>[key] = obj[key];//如果对象的属性值不为<span class="keyword">object</span>的时候，直接复制参数对象的每一个键值到新的对象对应的键值对中。
+            }
+        }
+        <span class="keyword">return</span> <span class="literal">result</span>;
+    }
+    <span class="keyword">return</span> obj;
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/07/26/node中n的使用——版本控制/" data-id="cjpdfz430001aeyp0tzmilq0a" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/11/js深拷贝的实现/" data-id="cjypybrwa0026wefy7ej5bd8d" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
+    </footer>
+  </div>
+  
+</article>
 
+
+  
+    <article id="post-Web-Components" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/14/Web-Components/" class="article-date">
+  <time datetime="2019-03-14T03:11:50.000Z" itemprop="datePublished">2019-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/14/Web-Components/">Web Components</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2019/03/14/Web-Components/" data-id="cjypybryk004wwefytuigmwsb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-json对象与js对象的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/26/json对象与js对象的区别/" class="article-date">
+  <time datetime="2019-02-26T06:28:49.000Z" itemprop="datePublished">2019-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/26/json对象与js对象的区别/">json对象与js对象的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2019/02/26/json对象与js对象的区别/" data-id="cjypybrxe003dwefyaoa0tka0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Object-assign-解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/26/Object-assign-解析/" class="article-date">
+  <time datetime="2019-02-26T06:28:27.000Z" itemprop="datePublished">2019-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/26/Object-assign-解析/">Object.assign()解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zjzno1.github.io/2019/02/26/Object-assign-解析/" data-id="cjypybryl004xwefyp2oavhde" class="article-share-link">Share</a>
+      
+      
     </footer>
   </div>
   
@@ -583,7 +607,7 @@ node -v <span class="comment">//查看当前node版本号</span>
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -603,7 +627,7 @@ node -v <span class="comment">//查看当前node版本号</span>
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es/">es</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/">flex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-https/">http/https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node相关试题/">node相关试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化相关/">性能优化相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络相关/">网络相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -612,7 +636,7 @@ node -v <span class="comment">//查看当前node版本号</span>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/es/" style="font-size: 10px;">es</a> <a href="/tags/es6/" style="font-size: 12.5px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/http-https/" style="font-size: 10px;">http/https</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/node相关试题/" style="font-size: 10px;">node相关试题</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/性能优化相关/" style="font-size: 10px;">性能优化相关</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/新特性/" style="font-size: 10px;">新特性</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/网络相关/" style="font-size: 10px;">网络相关</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -621,7 +645,7 @@ node -v <span class="comment">//查看当前node版本号</span>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -637,19 +661,19 @@ node -v <span class="comment">//查看当前node版本号</span>
           </li>
         
           <li>
-            <a href="/2017/09/08/css-实现多张图片居中显示/">css 实现多张图片居中显示</a>
+            <a href="/2019/07/29/js中高级相关问题/">js中高级相关问题</a>
           </li>
         
           <li>
-            <a href="/2017/09/04/js实现如何不点击跳转另一页面/">js实现如何不点击跳转另一页面</a>
+            <a href="/2019/07/23/算法相关/">算法相关</a>
           </li>
         
           <li>
-            <a href="/2017/08/31/prototype与-proto/">prototype与_proto_</a>
+            <a href="/2019/07/23/网络基础相关/">网络基础相关</a>
           </li>
         
           <li>
-            <a href="/2017/08/31/执行函数表达式-IIFE/">js立即执行函数表达式(IIFE)</a>
+            <a href="/2019/07/23/node相关试题/">node相关试题</a>
           </li>
         
       </ul>
@@ -664,7 +688,7 @@ node -v <span class="comment">//查看当前node版本号</span>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 Polar_Space(zjzno1)<br>
+      &copy; 2019 Polar_Space(zjzno1)<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
