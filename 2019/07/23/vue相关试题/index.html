@@ -5,16 +5,22 @@
   
   <title>vue相关试题 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. vue的生命周期及相关概念（哪个周期在干什么）2. vue-model 怎么实现双向数据绑定3. 组件之间的通信(传值)有几种实现方式4. vue和其他框架相比，有什么优缺点5. vue3.0（相关）和2.0比较，有什么优缺点6. vue里this的指向7. v-for的时候为什么要使用key，优缺点什么8. vue的diff算法9. vue怎么更新的视图，视图怎么更新vue10. vue中">
+  <meta name="description" content="1. vue的生命周期及相关概念（哪个周期在干什么）new vue()创建vue实例初始化event和lifecycle
+beforeCreate完成实例初始化，初始化非响应式变量this指向创建的实例；可以在这加个loading事件；data computed watch methods上的方法和数据均不能访问
+created实例创建完成完成数据(data props computed)的初始化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue相关试题">
 <meta property="og:url" content="http://zjzno1.github.io/2019/07/23/vue相关试题/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="1. vue的生命周期及相关概念（哪个周期在干什么）2. vue-model 怎么实现双向数据绑定3. 组件之间的通信(传值)有几种实现方式4. vue和其他框架相比，有什么优缺点5. vue3.0（相关）和2.0比较，有什么优缺点6. vue里this的指向7. v-for的时候为什么要使用key，优缺点什么8. vue的diff算法9. vue怎么更新的视图，视图怎么更新vue10. vue中">
-<meta property="og:updated_time" content="2019-07-25T05:05:36.226Z">
+<meta property="og:description" content="1. vue的生命周期及相关概念（哪个周期在干什么）new vue()创建vue实例初始化event和lifecycle
+beforeCreate完成实例初始化，初始化非响应式变量this指向创建的实例；可以在这加个loading事件；data computed watch methods上的方法和数据均不能访问
+created实例创建完成完成数据(data props computed)的初始化">
+<meta property="og:updated_time" content="2019-08-02T07:30:42.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue相关试题">
-<meta name="twitter:description" content="1. vue的生命周期及相关概念（哪个周期在干什么）2. vue-model 怎么实现双向数据绑定3. 组件之间的通信(传值)有几种实现方式4. vue和其他框架相比，有什么优缺点5. vue3.0（相关）和2.0比较，有什么优缺点6. vue里this的指向7. v-for的时候为什么要使用key，优缺点什么8. vue的diff算法9. vue怎么更新的视图，视图怎么更新vue10. vue中">
+<meta name="twitter:description" content="1. vue的生命周期及相关概念（哪个周期在干什么）new vue()创建vue实例初始化event和lifecycle
+beforeCreate完成实例初始化，初始化非响应式变量this指向创建的实例；可以在这加个loading事件；data computed watch methods上的方法和数据均不能访问
+created实例创建完成完成数据(data props computed)的初始化">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -86,11 +92,125 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-_vue的生命周期及相关概念（哪个周期在干什么）">1. vue的生命周期及相关概念（哪个周期在干什么）</h4><h4 id="2-_vue-model_怎么实现双向数据绑定">2. vue-model 怎么实现双向数据绑定</h4><h4 id="3-_组件之间的通信(传值)有几种实现方式">3. 组件之间的通信(传值)有几种实现方式</h4><h4 id="4-_vue和其他框架相比，有什么优缺点">4. vue和其他框架相比，有什么优缺点</h4><h4 id="5-_vue3-0（相关）和2-0比较，有什么优缺点">5. vue3.0（相关）和2.0比较，有什么优缺点</h4><h4 id="6-_vue里this的指向">6. vue里this的指向</h4><h4 id="7-_v-for的时候为什么要使用key，优缺点什么">7. v-for的时候为什么要使用key，优缺点什么</h4><h4 id="8-_vue的diff算法">8. vue的diff算法</h4><h4 id="9-_vue怎么更新的视图，视图怎么更新vue">9. vue怎么更新的视图，视图怎么更新vue</h4><h4 id="10-_vue中的on可以监听多个事件嘛">10. vue中的on可以监听多个事件嘛</h4><h4 id="11-_vuex相关，（action和mutations有什么区别）">11. vuex相关，（action和mutations有什么区别）</h4><h4 id="12-_vue-router相关（vue-router的生命周期，动态加载，传值，实现原理，全局守卫_https://router-vuejs-org/zh/_https://blog-csdn-net/yelin042/article/details/79932606）">12. vue-router相关（vue-router的生命周期，动态加载，传值，实现原理，全局守卫 <a href="https://router.vuejs.org/zh/" target="_blank" rel="external">https://router.vuejs.org/zh/</a>  <a href="https://blog.csdn.net/yelin042/article/details/79932606）" target="_blank" rel="external">https://blog.csdn.net/yelin042/article/details/79932606）</a></h4><h4 id="13-_keep-alive相关">13. keep-alive相关</h4><h4 id="14-_vue的渲染过程，vue组件的渲染过程">14. vue的渲染过程，vue组件的渲染过程</h4><h4 id="15-_vue中的data可以是个对象吗，为什么">15. vue中的data可以是个对象吗，为什么</h4><h4 id="16-_vue里的$this-nextTick();">16. vue里的$this.nextTick();</h4>
+        <h4 id="1-_vue的生命周期及相关概念（哪个周期在干什么）">1. vue的生命周期及相关概念（哪个周期在干什么）</h4><h6 id="new_vue()">new vue()</h6><p>创建vue实例<br>初始化event和lifecycle</p>
+<h6 id="beforeCreate">beforeCreate</h6><p>完成实例初始化，初始化非响应式变量<br>this指向创建的实例；<br>可以在这加个loading事件；<br>data computed watch methods上的方法和数据均不能访问</p>
+<h6 id="created">created</h6><p>实例创建完成<br>完成数据(data props computed)的初始化 导入依赖项。<br>可访问data computed watch methods上的方法和数据<br>未挂载DOM,不能访问$el,$ref为空数组<br>可在这结束loading，还做一些初始化，实现函数自执行,<br>可以对data数据进行操作，可进行一些请求，请求不易过多，避免白屏时间太长。<br>若在此阶段进行的 DOM 操作一定要放在 Vue.nextTick() 的回调函数中</p>
+<h6 id="beforeMount">beforeMount</h6><p>有了el,编译了template|/outerHTML<br>能找到对应的template,并编译成render函数</p>
+<h6 id="mounted">mounted</h6><p>完成创建vm.$el，和双向绑定，<br>完成挂载DOM 和渲染;可在mounted钩子对挂载的dom进行操作<br>即有了DOM 且完成了双向绑定 可访问DOM节点,$ref<br>可在这发起后端请求，拿回数据，配合路由钩子做一些事情；<br>可对DOM 进行操作</p>
+<h6 id="beforeUpdate">beforeUpdate</h6><p>数据更新之前<br>可在更新前访问现有的DOM,如手动移除添加的事件监听器；</p>
+<h6 id="updated">updated</h6><p>完成虚拟DOM的重新渲染和打补丁；<br>组件DOM 已完成更新；<br>可执行依赖的dom 操作<br>注意：不要在此函数中操作数据，会陷入死循环的。</p>
+<h6 id="beforeDistory">beforeDistory</h6><p>在执行app.$destroy()之前<br>可做一些删除提示，如：你确认删除XX吗？<br>可用于销毁定时器，解绑全局时间 销毁插件对象</p>
+<h6 id="destroyed">destroyed</h6><p>当前组件已被删除，销毁监听事件 组件 事件 子实例也被销毁<br>这时组件已经没有了，你无法操作里面的任何东西了。</p>
+<h5 id="在keep_alive组件中，还有一下两个周期">在<code>keep alive</code>组件中，还有一下两个周期</h5><h6 id="activated">activated</h6><p>在使用vue-router时有时需要使用<keep-alive></keep-alive>来缓存组件状态，这个时候created钩子就不会被重复调用了，<br>如果我们的子组件需要在每次加载的时候进行某些操作，可以使用activated钩子触发</p>
+<h6 id="deactivated">deactivated</h6><p>keep-alive 组件被移除时使用</p>
+<h4 id="2-_vue-model_怎么实现双向数据绑定">2. vue-model 怎么实现双向数据绑定</h4><p>Vue数据双向绑定（即数据响应式），是利用了Object.defineProperty()这个方法重新定义了对象获取属性值get和设置属性值set的操作来实现的。<br>数据的双向绑定，首先要对数据进行劫持监听，所以我们需要设置一个监听器Observer，用来监听所有属性。如果属性发生变化了，就需要告诉订阅者Watcher看是否需要更新。因为订阅者是有很多个，所以需要有一个消息订阅器Dep来专门收集这些订阅者，然后在监听器Observer和订阅者Watcher之间进行统一管理的。还需要有一个指令解析器Compile，对每个节点元素进行扫描和解析，将相关指令对应初始化成一个订阅者Watcher，并替换模板数据或者绑定相应的函数，此时当订阅者Watcher接收到相应属性的变化，就会执行对应的更新函数，从而更新视图。</p>
+<h4 id="3-_组件之间的通信(传值)有几种实现方式">3. 组件之间的通信(传值)有几种实现方式</h4><ol>
+<li>父组件向子组件传值props，子组件向父组件传值$emit</li>
+<li>$emit/$on</li>
+<li>vuex</li>
+<li>$attrs/$listeners</li>
+<li>provide/inject</li>
+<li>$parent / $children与 ref</li>
+</ol>
+<h4 id="4-_vue和其他框架相比，有什么优缺点">4. vue和其他框架相比，有什么优缺点</h4><h4 id="5-_vue3-0（相关）和2-0比较，有什么优缺点">5. vue3.0（相关）和2.0比较，有什么优缺点</h4><p>Evan You（尤雨溪）在2018年11月16日早上在 Vue Toronto 的主题演讲中预演了 Vue 3.0的新特性 。利用现代浏览器支持的新功能，Vue 3 将成为我们已经了解和喜爱的 Vue.js 强大的的改进版本。</p>
+<p>大概可以分为：</p>
+<ol>
+<li>更快</li>
+<li>更小</li>
+<li>更易于维护</li>
+<li>更多的原生支持</li>
+<li>更易于开发使用</li>
+</ol>
+<p>1、虚拟 DOM 重写，mounting和patching的速度提高100％<br>2、更多的编译时的提示来减少运行时的开销<br>3、组件快速路径+单个调用+子类型检测</p>
+<ul>
+<li>跳过不必要的条件分支</li>
+<li>JS引擎更容易优化<br>4、优化插槽的生成</li>
+<li>确保实例正确的跟踪依赖关系</li>
+<li>避免不必要的父子组件重新渲染<br>5、静态树提升</li>
+<li>跳过修补整棵树，从而降低渲染成本</li>
+<li>即使多次出现也能正常工作<br>6、静态属性提升</li>
+<li>跳过不会改变节点的修补过程，但是它的子组件会保持修补过程<br>7、内联的事件提升</li>
+<li>避免因为不同的内联函数标识而导致的不必要的重新渲染<br>8、基于Proxy的观察者机制，全语言覆盖+更好的性能</li>
+<li>目前vue使用的是Object.defineProperty 的 getter 和 setter</li>
+<li>组件实例初始化的速度提高100％</li>
+<li>使用Proxy节省以前一半的内存开销，加快速度，但是存在低浏览器版本的不兼容</li>
+<li>为了继续支持 IE11，Vue 3 将发布一个支持旧观察者机制和新 Proxy 版本的构建</li>
+</ul>
+<h5 id="更小">更小</h5><p>更友好的tree-shaking<br>新的core runtime 压缩后大概 10kb</p>
+<h5 id="更加可维护">更加可维护</h5><p>Flow -&gt; TypeScript<br>包的解耦<br>编译器重写</p>
+<pre><code>-<span class="ruby"> 可插拔的架构
+</span>-<span class="ruby"> 提供更强大的<span class="constant">IDE</span>支持来作为基础设施</span>
+</code></pre><h5 id="提供更方便的原生支持">提供更方便的原生支持</h5><p>运行时内核也将与平台无关，使得 Vue 可以更容易地与任何平台（例如Web，iOS或Android）一起使用</p>
+<h5 id="更方便的开发">更方便的开发</h5><p>暴露响应式的api</p>
+<h4 id="6-_vue里this的指向">6. vue里this的指向</h4><p>在根组件中<br>this 指向  vue实例<br>this.$el 指向绑定的根元素</p>
+<p>在子组件中<br>this  指向 Vue 子组件的实例<br>this.$el  指向 当前组件的DOM元素</p>
+<h4 id="7-_v-for的时候为什么要使用key，优缺点什么">7. v-for的时候为什么要使用key，优缺点什么</h4><p>vue和react都是采用diff算法来对比新旧虚拟节点，从而更新节点。在vue的diff函数中（建议先了解一下diff算法过程）。<br>在交叉对比中，当新节点跟旧节点头尾交叉对比没有结果时，会根据新节点的key去对比旧节点数组中的key，从而找到相应旧节点（这里对应的是一个key =&gt; index 的map映射）。如果没找到就认为是一个新增节点。而如果没有key，那么就会采用遍历查找的方式去找到对应的旧节点。一种一个map映射，另一种是遍历查找。相比而言。map映射的速度更快。</p>
+<p>为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有唯一 id</p>
+<p>key只在查找复用节点的时候起到了查找作用</p>
+<p>key 的特殊属性主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 对比时辨识 VNodes。如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。使用 key，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。</p>
+<h4 id="8-_vue的diff算法">8. vue的diff算法</h4><h4 id="9-_vue怎么更新的视图，视图怎么更新vue">9. vue怎么更新的视图，视图怎么更新vue</h4><h4 id="10-_vue中的on可以监听多个事件嘛">10. vue中的on可以监听多个事件嘛</h4><p>可以。<br>vm.$on( event, callback )<br>用法：<br>监听当前实例上的自定义事件。事件可以由vm.$emit触发。回调函数会接收所有传入事件触发函数的额外参数。（$emit和$on必须在一个公共实例上才能触发）</p>
+<h4 id="11-_vuex相关，（action和mutations有什么区别）">11. vuex相关，（action和mutations有什么区别）</h4><p>mutations 同步更新store里的state<br>action 异步更新store里的state</p>
+<h4 id="12-_vue-router相关（vue-router的生命周期，动态加载，传值，实现原理，全局守卫_https://router-vuejs-org/zh/_https://blog-csdn-net/yelin042/article/details/79932606）">12. vue-router相关（vue-router的生命周期，动态加载，传值，实现原理，全局守卫 <a href="https://router.vuejs.org/zh/" target="_blank" rel="external">https://router.vuejs.org/zh/</a>  <a href="https://blog.csdn.net/yelin042/article/details/79932606）" target="_blank" rel="external">https://blog.csdn.net/yelin042/article/details/79932606）</a></h4><h4 id="13-_keep-alive相关">13. keep-alive相关</h4><h4 id="14-_vue的渲染过程，vue组件的渲染过程">14. vue的渲染过程，vue组件的渲染过程</h4><h4 id="15-_vue中的data可以是个对象吗，为什么">15. vue中的data可以是个对象吗，为什么</h4><h4 id="16-_vue里的$this-nextTick();">16. vue里的$this.nextTick();</h4><p>nextTick 可以让我们在下次 DOM 更新循环结束之后执行延迟回调，用于获得更新后的 DOM。<br>在 Vue 2.4 之前都是使用的 microtasks，但是 microtasks 的优先级过高，在某些情况下可能会出现比事件冒泡更快的情况，但如果都使用 macrotasks 又可能会出现渲染的性能问题。所以在新版本中，会默认使用 microtasks，但在特殊情况下会使用 macrotasks，比如 v-on。<br>对于实现 macrotasks ，会先判断是否能使用 setImmediate ，不能的话降级为 MessageChannel ，以上都不行的话就使用 setTimeout</p>
+<pre><code><span class="keyword">if</span> (typeof setImmediate !== <span class="string">'undefined'</span> &amp;&amp; isNative(setImmediate)) {
+    macroTimerFunc = () =&gt; {
+        setImmediate(flushCallbacks)
+    }
+    } <span class="keyword">else</span> <span class="keyword">if</span> (
+    typeof MessageChannel !== <span class="string">'undefined'</span> &amp;&amp;
+    (isNative(MessageChannel) ||
+        <span class="comment">// PhantomJS</span>
+        MessageChannel.toString() === <span class="string">'[object MessageChannelConstructor]'</span>)
+    ) {
+    <span class="keyword">const</span> channel = <span class="keyword">new</span> MessageChannel()
+    <span class="keyword">const</span> port = channel.port2
+    channel.port1.onmessage = flushCallbacks
+    macroTimerFunc = () =&gt; {
+        port.postMessage(<span class="number">1</span>)
+    }
+    } <span class="keyword">else</span> {
+    <span class="comment">/* istanbul ignore next */</span>
+    macroTimerFunc = () =&gt; {
+        setTimeout(flushCallbacks, <span class="number">0</span>)
+    }
+}
+</code></pre><p>nextTick 同时也支持 Promise 的使用，会判断是否实现了 Promise</p>
+<pre><code><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">nextTick</span>(<span class="params">cb?: Function, ctx?: Object</span>) </span>{
+    <span class="keyword">let</span> _resolve
+    <span class="comment">// 将回调函数整合进一个数组中</span>
+    callbacks.push(() =&gt; {
+        <span class="keyword">if</span> (cb) {
+        <span class="keyword">try</span> {
+            cb.call(ctx)
+        } <span class="keyword">catch</span> (e) {
+            handleError(e, ctx, <span class="string">'nextTick'</span>)
+        }
+        } <span class="keyword">else</span> <span class="keyword">if</span> (_resolve) {
+        _resolve(ctx)
+        }
+    })
+    <span class="keyword">if</span> (!pending) {
+        pending = <span class="literal">true</span>
+        <span class="keyword">if</span> (useMacroTask) {
+        macroTimerFunc()
+        } <span class="keyword">else</span> {
+        microTimerFunc()
+        }
+    }
+    <span class="comment">// 判断是否可以使用 Promise </span>
+    <span class="comment">// 可以的话给 _resolve 赋值</span>
+    <span class="comment">// 这样回调函数就能以 promise 的方式调用</span>
+    <span class="keyword">if</span> (!cb &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span>) {
+        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(resolve =&gt; {
+        _resolve = resolve
+        })
+    }
+}
+</code></pre><p><a href="https://juejin.im/post/5d41eec26fb9a06ae439d29f?utm_source=gold_browser_extension#heading-16" target="_blank" rel="external">13道可以举一反三的Vue面试题</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2019/07/23/vue相关试题/" data-id="cjypybrvp001lwefy2mkexloq" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/23/vue相关试题/" data-id="cjz3fazzv001lp0fyj6yijvhu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -138,7 +258,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es/">es</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/">flex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-https/">http/https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node相关试题/">node相关试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化相关/">性能优化相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络相关/">网络相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es/">es</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/">flex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-https/">http/https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node相关试题/">node相关试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化相关/">性能优化相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络相关/">网络相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -147,7 +267,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/es/" style="font-size: 10px;">es</a> <a href="/tags/es6/" style="font-size: 12.5px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/http-https/" style="font-size: 10px;">http/https</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/node相关试题/" style="font-size: 10px;">node相关试题</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/性能优化相关/" style="font-size: 10px;">性能优化相关</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/新特性/" style="font-size: 10px;">新特性</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/网络相关/" style="font-size: 10px;">网络相关</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/es/" style="font-size: 10px;">es</a> <a href="/tags/es6/" style="font-size: 12.5px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/http-https/" style="font-size: 10px;">http/https</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/node相关试题/" style="font-size: 10px;">node相关试题</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/性能优化相关/" style="font-size: 10px;">性能优化相关</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/新特性/" style="font-size: 10px;">新特性</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/网络相关/" style="font-size: 10px;">网络相关</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -156,7 +276,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -172,6 +292,10 @@
           </li>
         
           <li>
+            <a href="/2019/08/07/http缓存详解/">http缓存详解</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/29/js中高级相关问题/">js中高级相关问题</a>
           </li>
         
@@ -181,10 +305,6 @@
         
           <li>
             <a href="/2019/07/23/网络基础相关/">网络基础相关</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/23/node相关试题/">node相关试题</a>
           </li>
         
       </ul>

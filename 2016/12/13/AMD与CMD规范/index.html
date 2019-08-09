@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>AMD与CMD规范 | 极昼博客</title>
+  <title>AMD，CMD，commonJS，UMD和es6 module的概念与区别 | 极昼博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。
-AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置
-第一个参数 id 为字符串类型，表示了模块">
+  <meta name="description" content="Javascript模块化模块化是指在解决某一个复杂问题或者一系列的杂糅问题时，依照一种分类的思维把问题进行系统性的分解以之处理。模块化是一种处理复杂系统分解为代码结构更合理，可维护性更高的可管理的模块的方式。可以想象一个巨大的系统代码，被整合优化分割成逻辑性很强的模块时，对于软件是一种何等意义的存在。对于软件行业来说：解耦软件系统的复杂性，使得不管多么大的系统，也可以将管理，开发，维护变得“有理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AMD与CMD规范">
+<meta property="og:title" content="AMD，CMD，commonJS，UMD和es6 module的概念与区别">
 <meta property="og:url" content="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/index.html">
 <meta property="og:site_name" content="极昼博客">
-<meta property="og:description" content="AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。
-AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置
-第一个参数 id 为字符串类型，表示了模块">
-<meta property="og:updated_time" content="2017-08-30T02:33:26.000Z">
+<meta property="og:description" content="Javascript模块化模块化是指在解决某一个复杂问题或者一系列的杂糅问题时，依照一种分类的思维把问题进行系统性的分解以之处理。模块化是一种处理复杂系统分解为代码结构更合理，可维护性更高的可管理的模块的方式。可以想象一个巨大的系统代码，被整合优化分割成逻辑性很强的模块时，对于软件是一种何等意义的存在。对于软件行业来说：解耦软件系统的复杂性，使得不管多么大的系统，也可以将管理，开发，维护变得“有理">
+<meta property="og:updated_time" content="2019-08-05T11:04:44.685Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AMD与CMD规范">
-<meta name="twitter:description" content="AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。
-AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置
-第一个参数 id 为字符串类型，表示了模块">
+<meta name="twitter:title" content="AMD，CMD，commonJS，UMD和es6 module的概念与区别">
+<meta name="twitter:description" content="Javascript模块化模块化是指在解决某一个复杂问题或者一系列的杂糅问题时，依照一种分类的思维把问题进行系统性的分解以之处理。模块化是一种处理复杂系统分解为代码结构更合理，可维护性更高的可管理的模块的方式。可以想象一个巨大的系统代码，被整合优化分割成逻辑性很强的模块时，对于软件是一种何等意义的存在。对于软件行业来说：解耦软件系统的复杂性，使得不管多么大的系统，也可以将管理，开发，维护变得“有理">
   
     <link rel="alternative" href="/atom.xml" title="极昼博客" type="application/atom+xml">
   
@@ -84,7 +78,7 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
         
   
     <h1 class="article-title" itemprop="name">
-      AMD与CMD规范
+      AMD，CMD，commonJS，UMD和es6 module的概念与区别
     </h1>
   
 
@@ -92,28 +86,150 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。<br>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。</p>
-<p>AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要在声明模块的时候指定所有的依赖dependencies，并且还要当做形参传到factory中，对于依赖的模块提前执行，依赖前置</p>
-<p>第一个参数 id 为字符串类型，表示了模块标识，为可选参数。若不存在则模块标识应该默认定义为在加载器中被请求脚本的标识。如果存在，那么模块标识必须为顶层的或者一个绝对的标识。<br>第二个参数，dependencies ，是一个当前模块依赖的，已被模块定义的模块标识的数组字面量。<br>第三个参数，factory，是一个需要进行实例化的函数或者一个对象。</p>
-<pre><code>define(<span class="string">"module"</span>, [<span class="string">"dep1"</span>, <span class="string">"dep2"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">d1, d2</span>) </span>{
-  <span class="keyword">return</span> someExportedValue;
-});
-<span class="built_in">require</span>([<span class="string">"module"</span>, <span class="string">"../file"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">module, file</span>) </span>{ <span class="comment">/* ... */</span> });
-</code></pre><p>优点：<br>适合在浏览器环境异步加载<br>并行加载多个模块<br>缺点：<br>提高开发成本，代码阅读和书写比较困难<br>不符合通用的模块思维方式，是一种妥协的实现</p>
-<p>在CMD中，一个模块就是一个文件，格式为：<br>    define( factory );<br>    全局函数define，用来定义模块。<br>    参数 factory  可以是一个函数，也可以为对象或者字符串。<br>    当 factory 为对象、字符串时，表示模块的接口就是该对象、字符串。</p>
-<pre><code><span class="class"><span class="keyword">define</span></span>(function(<span class="keyword">require</span>, exports, module) {
-  <span class="built_in">var</span> $ = <span class="keyword">require</span>(<span class="string">'jquery'</span>);
-  <span class="built_in">var</span> Spinning = <span class="keyword">require</span>(<span class="string">'./spinning'</span>);
-  exports<span class="built_in">.</span>doSomething = <span class="attribute">...</span>
-  module<span class="built_in">.</span>exports = <span class="attribute">...</span>
-})
-</code></pre><p>优点：</p>
-<p>依赖就近，延迟执行<br>很容易在node中运行<br>缺点：<br>依赖SPM打包，模块的加载逻辑偏重<br>实现： SeaJS</p>
+        <h4 id="Javascript模块化">Javascript模块化</h4><p>模块化是指在解决某一个复杂问题或者一系列的杂糅问题时，依照一种分类的思维把问题进行系统性的分解以之处理。模块化是一种处理复杂系统分解为代码结构更合理，可维护性更高的可管理的模块的方式。可以想象一个巨大的系统代码，被整合优化分割成逻辑性很强的模块时，对于软件是一种何等意义的存在。对于软件行业来说：解耦软件系统的复杂性，使得不管多么大的系统，也可以将管理，开发，维护变得“有理可循”。</p>
+<p>首先，既然是模块化设计，那么作为一个模块化系统所必须的能力：</p>
+<ol>
+<li>定义封装的模块。</li>
+<li>定义新模块对其他模块的依赖。</li>
+<li>可对其他模块的引入支持。</li>
+</ol>
+<h4 id="1-CommonJS和Node">1.CommonJS和Node</h4><p>CommonJS是服务器端模块的规范，Node.js采用了这个规范</p>
+<h5 id="CommonJS规范特点：">CommonJS规范特点：</h5><ol>
+<li>CommonJS 加载模块是同步的，所以只有加载完成才能执行后面的操作，模块加载的顺序按照其在代码中出现的顺序加载。由于Node.js主要用于服务器编程，模块文件一般都已经存在于本地硬盘，所以加载起来比较快，不用考虑非同步加载的方式，所以CommonJS规范比较适用。</li>
+<li>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。（输入的是被输出值的拷贝。也就是说，一旦输出一个值，模块内部的变化就影响不到这个值了）</li>
+<li>一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在一个文件定义的变量（还包括函数和类），都是私有的，对其他文件是不可见的。<br>使用方式：</li>
+</ol>
+<p>根据CommonJS规范，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的exports对象。commonjs规定，每个模块内部，module变量代表当前模块，这个变量是一个对象，它的exports 属性（即module.exports）是对外的接口，加载某个模块，其实是加载该模块的module.exports属性</p>
+<pre><code><span class="comment">// example.js</span>
+<span class="built_in">let</span> x = <span class="number">5</span>;
+<span class="built_in">let</span> addX = <span class="function"><span class="keyword">function</span><span class="params">(value)</span>{</span>
+    return value + x;
+};
 
+<span class="function"><span class="keyword">module</span>.<span class="title">exports</span>.<span class="title">x</span> =</span> x;
+<span class="function"><span class="keyword">module</span>.<span class="title">exports</span>.<span class="title">addX</span> =</span> addX;
+</code></pre><p>在上面代码通过  module.exports输出 变量x 和 函数 addX.</p>
+<p>require 方法用于加载模块</p>
+<pre><code>var example = require(<span class="string">'./example.js'</span>)<span class="operator">'</span>;
+console.<span class="built_in">log</span>(example.x);
+console.<span class="built_in">log</span>(example.addX(<span class="number">1</span>);
+</code></pre><p>为了方便，Node为每个模块提供一个exports变量，指向module.exports。这等同在每个模块头部，有一行这样的命令。 </p>
+<p>var exports = module.exports;<br>于是我们可以直接在 exports 对象上添加方法，表示对外输出的接口，如同在module.exports上添加一样。注意，不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系。<br>提出问题</p>
+<p>但如果是浏览器环境，要从服务器加载模块，这是就必须采用异步模式。所以就有了 AMD  CMD 等解决方案。 那为什么在浏览器环境，就必须采用异步模式加载模块?</p>
+<h4 id="2-AMD规范和RequireJs">2.AMD规范和RequireJs</h4><p>AMD 全称是 Asynchronous Module Definition ，即异步模块加载机制</p>
+<p>RequireJS 是一个前端的模块化管理的工具库，遵循AMD规范，它的作者就是AMD规范的创始人 James Burke。<br>RequireJS 的基本思想为：通过一个函数来将所有所需要的或者说所依赖的模块实现装载进来，然后返回一个新的函数（模块），我们所有的关于新模块的业务代码都在这个函数内部操作，其内部也可无限制的使用已经加载进来的模块。<br>RequireJs特点：</p>
+<ol>
+<li>AMD规范是预加载，也就是说会将所有模块全加载，也可以实现动态加载(requirejs2.0 版本也支持)。</li>
+<li>管理模块之间的依赖性，便于代码的编写和维护，可以让代码松耦合</li>
+</ol>
+<p>RequireJs的用法</p>
+<pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/require.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</code></pre><p>那么scripts下的main.js则是指定的主代码脚本文件，所有的依赖模块代码文件都将从该文件开始异步加载进入执行。</p>
+<p>define用于定义模块，RequireJS要求每个模块均放在独立的文件之中。按照是否有依赖其他模块的情况分为独立模块和非独立模块。</p>
+<p>独立模块，不依赖其他模块。直接定义：</p>
+<pre><code>define({
+    method1: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{},
+    method2: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{}
+});
+<span class="comment">// 也等价于</span>
+define(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+    <span class="keyword">return</span> {
+        method1: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{},
+        method2: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{}
+    }
+});
+</code></pre><p>非独立模块，对其他模块有依赖。</p>
+<pre><code>define([ <span class="string">'module1'</span>, <span class="string">'module2'</span> ], <span class="function"><span class="keyword">function</span>(<span class="params">m1, m2</span>) </span>{
+    ...
+});
+<span class="comment">// 或者是</span>
+define(<span class="function"><span class="keyword">function</span>(<span class="params">require</span>) </span>{
+    <span class="keyword">var</span> m1 = <span class="built_in">require</span>(<span class="string">'module1'</span>),
+        m2 = <span class="built_in">require</span>(<span class="string">'module2'</span>);
+    ...
+});
+</code></pre><p>require方法调用模块<br>在require进行调用模块时，其参数与define类似。</p>
+<pre><code>require<span class="list">([<span class="quoted">'foo</span>', <span class="quoted">'bar</span>'], function<span class="list">(<span class="keyword">foo</span>, bar)</span> {
+    foo.func<span class="list">()</span><span class="comment">;</span>
+    bar.func<span class="list">()</span><span class="comment">;</span>
+} )</span><span class="comment">;</span>
+</code></pre><p>define 和 require 这两个定义模块，调用模块的方法合称为AMD模式，定义模块清晰，不会污染全局变量，清楚的显示依赖关系。AMD模式可以用于浏览器环境并且允许非同步加载模块，也可以按需动态加载模块。</p>
+<h4 id="3-CMD和SeaJS">3.CMD和SeaJS</h4><p>CMD是SeaJS 在推广过程中对模块定义的规范化产出<br>Common Module Definition表示通用模块定义，该规范是国内发展出来的，由阿里的玉伯提出。</p>
+<p>SeaJS特点：</p>
+<ol>
+<li>CMD规范是懒加载，按需加载，也就是在require的时候相应的模块才会被加载进来。</li>
+<li>对于依赖的模块CMD是延迟执行。</li>
+<li><p>AMD的API默认是一个当多个用，CMD严格的区分推崇职责单一。例如：AMD里require分全局的和局部的。CMD里面没有全局的 require，提供 seajs.use()来实现模块系统的加载启动。CMD里每个API都简单纯粹</p>
+<p> //AMD<br> define([‘./a’,’./b’], function (a, b) {</p>
+<pre><code><span class="comment">//依赖一开始就写好</span>
+a.test<span class="comment">()</span>;
+b.test<span class="comment">()</span>;
+</code></pre><p> });</p>
+<p> //CMD<br> define(function (requie, exports, module) {</p>
+<pre><code><span class="comment">//依赖可以就近书写</span>
+var a = require<span class="comment">('./a')</span>;
+a.test<span class="comment">()</span>;
+
+...
+<span class="comment">//软依赖, 动态加载</span>
+<span class="keyword">if</span> <span class="comment">(status)</span> {
+
+    var b = requie<span class="comment">('./b')</span>;
+    b.test<span class="comment">()</span>;
+}
+</code></pre><p> });</p>
+</li>
+</ol>
+<p>seajs 使用demo <a href="https://www.cnblogs.com/imwtr/p/4666150.html" target="_blank" rel="external">https://www.cnblogs.com/imwtr/p/4666150.html</a><br><a href="https://www.jd.com/" target="_blank" rel="external">https://www.jd.com/</a>   js main.min.js 文件用的就是seaJs</p>
+<h4 id="4-UMD">4.UMD</h4><p>UMD是AMD和CommonJS的糅合</p>
+<p>AMD模块以浏览器第一的原则发展，异步加载模块。</p>
+<p>CommonJS模块以服务器第一原则发展，选择同步加载，它的模块无需包装。<br>这迫使人们又想出另一个更通用的模式UMD （Universal Module Definition）。希望解决跨平台的解决方案。<br>UMD先判断是否支持Node.js的模块（exports）是否存在，存在则使用Node.js模块模式。<br>在判断是否支持AMD（define是否存在），存在则使用AMD方式加载模块。</p>
+<pre><code><span class="list">(<span class="keyword">function</span> <span class="list">(<span class="keyword">window</span>, factory)</span> <span class="collection">{
+    if <span class="list">(<span class="keyword">typeof</span> exports === 'object')</span> <span class="collection">{
+
+        module.exports = factory<span class="list">()</span><span class="comment">;</span>
+    }</span> else if <span class="list">(<span class="keyword">typeof</span> define === 'function' &amp;&amp; define.amd)</span> <span class="collection">{
+
+        define<span class="list">(<span class="keyword">factory</span>)</span><span class="comment">;</span>
+    }</span> else <span class="collection">{
+
+        window.eventUtil = factory<span class="list">()</span><span class="comment">;</span>
+    }</span>
+}</span>)</span><span class="list">(<span class="keyword">this</span>, function <span class="list">()</span> <span class="collection">{
+    // module ...
+}</span>)</span><span class="comment">;</span>
+</code></pre><p>node 包 moment.js就是可以跨平台使用的，内部采用的就是这种写法</p>
+<h4 id="5-ES6_Module模块化">5.ES6  Module模块化</h4><p>ES6 的模块自动采用严格模式，不管你有没有在模块头部加上”use strict”;。</p>
+<p>模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。</p>
+<p>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用export关键字输出该变量。下面是一个 JS 文件，里面使用export命令输出变量。</p>
+<h5 id="Module特点：">Module特点：</h5><ol>
+<li>ES6模块中的值属于【动态只读引用】。</li>
+<li>对于只读来说，即不允许修改引入变量的值，import的变量是只读的，不论是基本数据类型还是复杂数据类型。当模块遇到import命令时，就会生成一个只读引用。等到脚本真正执行时，再根据这个只读引用，到被加载的那个模块里面去取值。</li>
+<li>对于动态来说，原始值发生变化，import加载的值也会发生变化。不论是基本数据类型还是复杂数据类型。</li>
+<li>循环加载时，ES6模块是动态引用。只要两个模块之间存在某个引用，代码就能够执行。</li>
+<li>代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见。</li>
+<li>模块脚本自动采用严格模式，不管有没有声明use strict。</li>
+<li>模块之中，可以使用import命令加载其他模块（.js后缀不可省略，需要提供绝对 URL 或相对 URL），也可以使用export命令输出对外接口。</li>
+<li>模块之中，顶层的this关键字返回undefined，而不是指向window。也就是说，在模块顶层使用this关键字，是无意义的。</li>
+<li><p>同一个模块如果加载多次，将只执行一次。</p>
+<p> export var firstName = ‘Michael’;<br> export var lastName = ‘Jackson’;<br> export var year = 1958;</p>
+</li>
+</ol>
+<p>export语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。</p>
+<p>export default命令用于指定模块的默认输出。显然，一个模块只能有一个默认输出，因此export default命令只能使用一次。所以，import命令后面才不用加大括号，因为只可能唯一对应export default命令。</p>
+<p>使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块。</p>
+<pre><code><span class="comment">// main.js</span>
+<span class="keyword">import</span> {firstName, lastName, year} <span class="keyword">from</span> <span class="string">'./profile.js'</span>;
+
+<span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">element</span>) </span>{
+element.textContent = firstName + <span class="string">' '</span> + lastName;
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/" data-id="cjypybryo0057wefyv7qc5ejt" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2016/12/13/AMD与CMD规范/" data-id="cjz3fb02v005cp0fyf5p5xzx7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/规范/">规范</a></li></ul>
@@ -161,7 +277,7 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es/">es</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/">flex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-https/">http/https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node相关试题/">node相关试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化相关/">性能优化相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络相关/">网络相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVVM/">MVVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app-store/">app store</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es/">es</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flex/">flex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-博客/">hexo 博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-https/">http/https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node相关试题/">node相关试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三角形/">三角形</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件冒泡/">事件冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件委托/">事件委托</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件捕获/">事件捕获</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件绑定/">事件绑定</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前言/">前言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型-原型链/">原型/原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调函数/">回调函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化相关/">性能优化相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/收藏/">收藏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/柯里化/">柯里化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型/">模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水平竖直居中/">水平竖直居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深拷贝-浅拷贝/">深拷贝/浅拷贝</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络相关/">网络相关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题（知识点）总结/">面试题（知识点）总结</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -170,7 +286,7 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/es/" style="font-size: 10px;">es</a> <a href="/tags/es6/" style="font-size: 12.5px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/http-https/" style="font-size: 10px;">http/https</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/node相关试题/" style="font-size: 10px;">node相关试题</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/性能优化相关/" style="font-size: 10px;">性能优化相关</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/新特性/" style="font-size: 10px;">新特性</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/网络相关/" style="font-size: 10px;">网络相关</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
+      <a href="/tags/IIFE/" style="font-size: 10px;">IIFE</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/app-store/" style="font-size: 10px;">app store</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/es/" style="font-size: 10px;">es</a> <a href="/tags/es6/" style="font-size: 12.5px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/hexo-博客/" style="font-size: 10px;">hexo 博客</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/http-https/" style="font-size: 10px;">http/https</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/node相关试题/" style="font-size: 10px;">node相关试题</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/三角形/" style="font-size: 10px;">三角形</a> <a href="/tags/事件冒泡/" style="font-size: 10px;">事件冒泡</a> <a href="/tags/事件委托/" style="font-size: 10px;">事件委托</a> <a href="/tags/事件捕获/" style="font-size: 10px;">事件捕获</a> <a href="/tags/事件绑定/" style="font-size: 10px;">事件绑定</a> <a href="/tags/前言/" style="font-size: 10px;">前言</a> <a href="/tags/原型-原型链/" style="font-size: 10px;">原型/原型链</a> <a href="/tags/回调函数/" style="font-size: 10px;">回调函数</a> <a href="/tags/性能优化相关/" style="font-size: 10px;">性能优化相关</a> <a href="/tags/收藏/" style="font-size: 10px;">收藏</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/新特性/" style="font-size: 10px;">新特性</a> <a href="/tags/柯里化/" style="font-size: 10px;">柯里化</a> <a href="/tags/模型/" style="font-size: 10px;">模型</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/水平竖直居中/" style="font-size: 10px;">水平竖直居中</a> <a href="/tags/深拷贝-浅拷贝/" style="font-size: 10px;">深拷贝/浅拷贝</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/网络相关/" style="font-size: 10px;">网络相关</a> <a href="/tags/规范/" style="font-size: 10px;">规范</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/面试题（知识点）总结/" style="font-size: 15px;">面试题（知识点）总结</a>
     </div>
   </div>
 
@@ -179,7 +295,7 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2116/03/">三月 2116</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -195,6 +311,10 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
           </li>
         
           <li>
+            <a href="/2019/08/07/http缓存详解/">http缓存详解</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/29/js中高级相关问题/">js中高级相关问题</a>
           </li>
         
@@ -204,10 +324,6 @@ AMD规范其实只有一个主要接口 define(id,dependencies,factory)，它要
         
           <li>
             <a href="/2019/07/23/网络基础相关/">网络基础相关</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/23/node相关试题/">node相关试题</a>
           </li>
         
       </ul>
