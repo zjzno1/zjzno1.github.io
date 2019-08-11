@@ -18,7 +18,7 @@ http1支持get，post，head请求缺点：
 
 每个tcp连接只能发送一个请求，发送完毕后，连接就关闭了，要想发送其他请求，需要再开一个tcp连接（解决方法是加一个Connection: keep-alive字段，但这不是标准字段，不同的实现行为可能">
 <meta property="og:image" content="https://github.com/zjzno1/img/blob/master/http.png?raw=true">
-<meta property="og:updated_time" content="2019-08-05T14:52:35.555Z">
+<meta property="og:updated_time" content="2019-08-09T01:36:48.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础相关">
 <meta name="twitter:description" content="1. 简述一下http1 1.1 2 3的区别http://www.ruanyifeng.com/blog/2016/08/http.html
@@ -167,7 +167,36 @@ http1支持get，post，head请求缺点：
 <p>3.隐藏的表单域：<br>HTML 表单中可以含有如下的条目：<input type="hidden" name="session" value="a1234"><br>这个条目的意思是：在提交表单时，要将指定的名称和值自动包括在 GET 或 POST 数据中。这个隐藏域可以用来存储有关会话的信息，但它的主要缺点是：仅当每个页面都是由表单提交而动态生成时，才能使用这种方法。单击常规的超文本链接并不产生表单提交，因此隐藏的表单域不能支持通常的会话跟踪，只能用于一系列特定的操作中，比如在线商店的结账过程。</p>
 <p>4.session:<br>信息保存在服务器端<br>使用 setAttribute(String str,Object obj)方法将对象捆绑到一个会话</p>
 <h4 id="8-_http_method">8. http method</h4><p>1 GET 请求指定的页面信息，并返回实体主体。<br>2 HEAD 类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头<br>3 POST 向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。<br>4 PUT 从客户端向服务器传送的数据取代指定的文档的内容。<br>5 DELETE 请求服务器删除指定的页面。<br>6 CONNECT HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。<br>7 OPTIONS 允许客户端查看服务器的性能。<br>8 TRACE 回显服务器收到的请求，主要用于测试或诊断。<br>9 PATCH 是对 PUT 方法的补充，用来对已知资源进行局部更新 。</p>
-<h4 id="9-_js跨域通信（跨域产生的原因，常见解决方法及原理，手动实现个jsonp）">9. js跨域通信（跨域产生的原因，常见解决方法及原理，手动实现个jsonp）</h4><h4 id="10-_http常用状态码_101，200，301，302，304，401，403，404，500，502等">10. http常用状态码 101，200，301，302，304，401，403，404，500，502等</h4><ul>
+<h4 id="9-_js跨域通信（跨域产生的原因，常见解决方法及原理，手动实现个jsonp）">9. js跨域通信（跨域产生的原因，常见解决方法及原理，手动实现个jsonp）</h4><pre><code><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">options</span>) </span>{
+  <span class="comment">// 设置默认初始值</span>
+  <span class="keyword">var</span> defaultObj = {
+      url: <span class="string">''</span>,
+      jsonpCallback: <span class="string">'jsonpCallback'</span>,
+      data: {},
+      success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{ }
+  }
+  <span class="comment">// 传入参数的拼接</span>
+  <span class="keyword">var</span> dataStr = <span class="string">''</span>;
+  <span class="comment">// 合并传入新值</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> attr <span class="keyword">in</span> options) {
+      defaultObj[attr] = options[attr];
+  }
+  <span class="comment">// 拼接传入的参数</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> defaultObj.data) {
+      dataStr += <span class="string">`key=<span class="subst">${defaultObj.data[key]}</span>&amp;`</span>
+  }
+  <span class="built_in">window</span>[defaultObj.jsonpCallback] = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{
+      defaultObj.success(data);
+  }
+  <span class="comment">// 生成script，回调执行callback</span>
+  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
+  script.src = <span class="string">`<span class="subst">${defaultObj.url}</span>?<span class="subst">${dataStr}</span>&amp;<span class="subst">${defaultObj.jsonpCallback}</span>=<span class="subst">${defaultObj.jsonpCallback}</span>`</span>;
+  <span class="comment">// 获取head元素，把生成的script标签放到script后面</span>
+  <span class="keyword">var</span> head = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];
+  head.appendChild(script);
+</code></pre><p>  }</p>
+<p>  jsonp({<br>      url: ‘<a href="http://libpre.cnsuning.com/api/jsonp/snjw.jsonp" target="_blank" rel="external">http://libpre.cnsuning.com/api/jsonp/snjw.jsonp</a>‘,<br>      jsonpCallback: ‘cmsCallback’,<br>      data: {<br>          a: 1,<br>          b: 2<br>      },<br>      success: function (data) {<br>          console.log(112233, data);<br>      }<br>  })</p>
+<h4 id="10-_http常用状态码_101，200，301，302，304，401，403，404，500，502等">10. http常用状态码 101，200，301，302，304，401，403，404，500，502等</h4><ul>
 <li>1xx Informational(信息性状态码) 接受的请求正在处理</li>
 <li>2xx Success(成功状态码) 请求正常处理完毕</li>
 <li>3xx Redirection(重定向状态码) 需要进行附加操作一完成请求</li>
@@ -199,7 +228,7 @@ http1支持get，post，head请求缺点：
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zjzno1.github.io/2019/07/23/网络基础相关/" data-id="cjz3fazz10009p0fyluh0txb7" class="article-share-link">Share</a>
+      <a data-url="http://zjzno1.github.io/2019/07/23/网络基础相关/" data-id="cjz707cof00099yfy7aysin38" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http-https/">http/https</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络相关/">网络相关</a></li></ul>
